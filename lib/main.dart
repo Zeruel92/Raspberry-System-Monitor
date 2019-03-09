@@ -31,9 +31,16 @@ class _State extends State<MyApp> {
                 if (snap.hasData) {
                   return Text(snap.data);
                 } else
-                  return CircularProgressIndicator(
-                    semanticsLabel: 'Searching for a Raspberrypi',
-                  );
+                  return Container(
+                      child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                        Text('Searching RaspberryPi in your Local Network.....')
+                      ],
+                    ),
+                  ));
               },
             ),
           ],
