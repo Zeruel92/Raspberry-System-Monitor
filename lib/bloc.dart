@@ -22,7 +22,7 @@ class Bloc {
     _uptimeStream = _uptimeSubject.stream;
     _socketListen();
     _indirizzoRaspberrySubject.listen((address) async {
-      dynamic res = await http.get('http://${address.address}:8080/uptime');
+      dynamic res = await http.get('http://${address.address}:8888/uptime');
       _sinkUptime.add(res.body);
     });
   }
