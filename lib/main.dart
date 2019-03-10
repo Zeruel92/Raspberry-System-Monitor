@@ -3,13 +3,13 @@ import 'package:raspberry_system_monitor/bloc.dart';
 
 void main() {
   Bloc bloc = new Bloc();
-  runApp(new MaterialApp(home: new MyApp(bloc), theme: ThemeData.dark()));
+  runApp(new MaterialApp(home: new MyApp(bloc: bloc), theme: ThemeData.dark()));
 }
 
 class MyApp extends StatefulWidget {
-  Bloc bloc;
+  final Bloc bloc;
 
-  MyApp(this.bloc);
+  MyApp({this.bloc});
 
   @override
   _State createState() => new _State();
