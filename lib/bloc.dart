@@ -39,7 +39,6 @@ class Bloc {
       socket.listen((e) {
         Datagram dg = socket.receive();
         _sinkAddress.add(dg.address);
-        print("okane ha un cane di chi è il cane?");
       });
     });
   }
