@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 
+import 'models/uptime.dart';
+
 class Bloc {
-  BehaviorSubject<String> _uptimeSubject;
+  BehaviorSubject<Uptime> _uptimeSubject;
   BehaviorSubject<InternetAddress> _indirizzoRaspberrySubject;
 
   Sink<InternetAddress> _sinkAddress;
@@ -23,7 +25,7 @@ class Bloc {
     _socketListen();
     _indirizzoRaspberrySubject.listen((address) async {
       dynamic res = await http.get('http://${address.address}:8888/uptime');
-      _sinkUptime.add(res.body);
+      _sinkUptime.add(Uptime.fromJson(res.body));
     });
   }
 
@@ -38,7 +40,7 @@ class Bloc {
     RawDatagramSocket.bind(InternetAddress.anyIPv4, 8889).then((socket) {
       socket.listen((e) {
         Datagram dg = socket.receive();
-        _sinkAddress.add(dg.address);
+        _sinkAddress.add(dg?.address);
       });
     });
   }

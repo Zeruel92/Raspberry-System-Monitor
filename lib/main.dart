@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/bloc.dart';
+import 'models/uptime.dart';
 
 void main() {
   Bloc bloc = new Bloc();
@@ -29,7 +30,7 @@ class _State extends State<MyApp> {
               stream: widget.bloc.uptime,
               builder: (context, AsyncSnapshot snap) {
                 if (snap.hasData) {
-                  return Text(snap.data);
+                  return Text('Load Avg: ${snap.data.loadAvg}');
                 } else
                   return Container(
                       child: Center(

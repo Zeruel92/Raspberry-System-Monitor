@@ -18,9 +18,17 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
   Iterable serialize(Serializers serializers, Uptime object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'uptime',
-      serializers.serialize(object.uptime,
-          specifiedType: const FullType(String)),
+      'time',
+      serializers.serialize(object.time, specifiedType: const FullType(String)),
+      'loadAvg',
+      serializers.serialize(object.loadAvg,
+          specifiedType: const FullType(double)),
+      'loadAvg5',
+      serializers.serialize(object.loadAvg5,
+          specifiedType: const FullType(double)),
+      'loadAvg15',
+      serializers.serialize(object.loadAvg15,
+          specifiedType: const FullType(double)),
     ];
 
     return result;
@@ -37,9 +45,21 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'uptime':
-          result.uptime = serializers.deserialize(value,
+        case 'time':
+          result.time = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'loadAvg':
+          result.loadAvg = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'loadAvg5':
+          result.loadAvg5 = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'loadAvg15':
+          result.loadAvg15 = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
           break;
       }
     }
@@ -50,14 +70,30 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
 
 class _$Uptime extends Uptime {
   @override
-  final String uptime;
+  final String time;
+  @override
+  final double loadAvg;
+  @override
+  final double loadAvg5;
+  @override
+  final double loadAvg15;
 
   factory _$Uptime([void updates(UptimeBuilder b)]) =>
       (new UptimeBuilder()..update(updates)).build();
 
-  _$Uptime._({this.uptime}) : super._() {
-    if (uptime == null) {
-      throw new BuiltValueNullFieldError('Uptime', 'uptime');
+  _$Uptime._({this.time, this.loadAvg, this.loadAvg5, this.loadAvg15})
+      : super._() {
+    if (time == null) {
+      throw new BuiltValueNullFieldError('Uptime', 'time');
+    }
+    if (loadAvg == null) {
+      throw new BuiltValueNullFieldError('Uptime', 'loadAvg');
+    }
+    if (loadAvg5 == null) {
+      throw new BuiltValueNullFieldError('Uptime', 'loadAvg5');
+    }
+    if (loadAvg15 == null) {
+      throw new BuiltValueNullFieldError('Uptime', 'loadAvg15');
     }
   }
 
@@ -71,17 +107,27 @@ class _$Uptime extends Uptime {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Uptime && uptime == other.uptime;
+    return other is Uptime &&
+        time == other.time &&
+        loadAvg == other.loadAvg &&
+        loadAvg5 == other.loadAvg5 &&
+        loadAvg15 == other.loadAvg15;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, uptime.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, time.hashCode), loadAvg.hashCode), loadAvg5.hashCode),
+        loadAvg15.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Uptime')..add('uptime', uptime))
+    return (newBuiltValueToStringHelper('Uptime')
+          ..add('time', time)
+          ..add('loadAvg', loadAvg)
+          ..add('loadAvg5', loadAvg5)
+          ..add('loadAvg15', loadAvg15))
         .toString();
   }
 }
@@ -89,15 +135,30 @@ class _$Uptime extends Uptime {
 class UptimeBuilder implements Builder<Uptime, UptimeBuilder> {
   _$Uptime _$v;
 
-  String _uptime;
-  String get uptime => _$this._uptime;
-  set uptime(String uptime) => _$this._uptime = uptime;
+  String _time;
+  String get time => _$this._time;
+  set time(String time) => _$this._time = time;
+
+  double _loadAvg;
+  double get loadAvg => _$this._loadAvg;
+  set loadAvg(double loadAvg) => _$this._loadAvg = loadAvg;
+
+  double _loadAvg5;
+  double get loadAvg5 => _$this._loadAvg5;
+  set loadAvg5(double loadAvg5) => _$this._loadAvg5 = loadAvg5;
+
+  double _loadAvg15;
+  double get loadAvg15 => _$this._loadAvg15;
+  set loadAvg15(double loadAvg15) => _$this._loadAvg15 = loadAvg15;
 
   UptimeBuilder();
 
   UptimeBuilder get _$this {
     if (_$v != null) {
-      _uptime = _$v.uptime;
+      _time = _$v.time;
+      _loadAvg = _$v.loadAvg;
+      _loadAvg5 = _$v.loadAvg5;
+      _loadAvg15 = _$v.loadAvg15;
       _$v = null;
     }
     return this;
@@ -118,7 +179,12 @@ class UptimeBuilder implements Builder<Uptime, UptimeBuilder> {
 
   @override
   _$Uptime build() {
-    final _$result = _$v ?? new _$Uptime._(uptime: uptime);
+    final _$result = _$v ??
+        new _$Uptime._(
+            time: time,
+            loadAvg: loadAvg,
+            loadAvg5: loadAvg5,
+            loadAvg15: loadAvg15);
     replace(_$result);
     return _$result;
   }
