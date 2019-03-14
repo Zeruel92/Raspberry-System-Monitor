@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/bloc.dart';
 import 'models/uptime.dart';
+import 'widget.dart';
 
 void main() {
   Bloc bloc = new Bloc();
@@ -26,24 +27,7 @@ class _State extends State<MyApp> {
       body: new Container(
         child: new Column(
           children: <Widget>[
-            StreamBuilder(
-              stream: widget.bloc.uptime,
-              builder: (context, AsyncSnapshot snap) {
-                if (snap.hasData) {
-                  return Text('Load Avg: ${snap.data.loadAvg}');
-                } else
-                  return Container(
-                      child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                        Text('Searching RaspberryPi in your Local Network.....')
-                      ],
-                    ),
-                  ));
-              },
-            ),
+            LoadAvg(uptimeStream: widget.bloc.uptime),
           ],
         ),
       ),
