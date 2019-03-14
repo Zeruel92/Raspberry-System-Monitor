@@ -19,13 +19,16 @@ class _LoadAvgState extends State<LoadAvg> {
         stream: uptimeStream,
         builder: (context, AsyncSnapshot snap) {
           if (snap.hasData) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text('Current load Avarege: ${snap.data.loadAvg}'),
-                Text('Last 5 minutes Load Average ${snap.data.loadAvg5}'),
-                Text('Last 15 minutes Load Average ${snap.data.loadAvg15}')
-              ],
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text('Current load Avarege: ${snap.data.loadAvg}'),
+                  Text('Last 5 minutes Load Average ${snap.data.loadAvg5}'),
+                  Text('Last 15 minutes Load Average ${snap.data.loadAvg15}')
+                ],
+              ),
             );
           } else
             return Container(

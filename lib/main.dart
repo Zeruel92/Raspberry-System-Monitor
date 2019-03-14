@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/bloc.dart';
-import 'models/uptime.dart';
 import 'widget.dart';
 
 void main() {
