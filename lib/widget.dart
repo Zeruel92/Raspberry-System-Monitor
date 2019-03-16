@@ -24,6 +24,7 @@ class _LoadAvgState extends State<LoadAvg> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  Text('Uptime: ${snap.data.time}'),
                   Text('Current load Avarege: ${snap.data.loadAvg}'),
                   Text('Last 5 minutes Load Average ${snap.data.loadAvg5}'),
                   Text('Last 15 minutes Load Average ${snap.data.loadAvg15}')
