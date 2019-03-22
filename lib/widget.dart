@@ -47,3 +47,35 @@ class _LoadAvgState extends State<LoadAvg> {
     );
   }
 }
+
+class PowerOffButton extends StatelessWidget {
+  final Sink powerOffSink;
+
+  PowerOffButton({this.powerOffSink});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.power_settings_new),
+      onPressed: _powerOff,
+    );
+  }
+
+  void _powerOff() => powerOffSink.add(true);
+}
+
+class RebootButton extends StatelessWidget {
+  final Sink rebootSink;
+
+  RebootButton({this.rebootSink});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.refresh),
+      onPressed: _reboot,
+    );
+  }
+
+  void _reboot() => rebootSink.add(true);
+}

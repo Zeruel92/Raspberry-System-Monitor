@@ -22,6 +22,12 @@ class _State extends State<MyApp> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Raspberry System Monitor'),
+        actions: <Widget>[
+          PowerOffButton(powerOffSink: widget.bloc.powerOff),
+          RebootButton(
+            rebootSink: widget.bloc.reboot,
+          )
+        ],
       ),
       body: new Container(
         child: new Column(
