@@ -35,6 +35,7 @@ class _State extends State<MyApp> {
             LoadAvg(uptimeStream: widget.bloc.uptime),
             TorrentTile(
               torrent: widget.bloc.torrent,
+              toggle: widget.bloc.torrentToggleSink,
             )
           ],
         ),

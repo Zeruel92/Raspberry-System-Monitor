@@ -22,6 +22,9 @@ class _$TorrentStatsSerializer implements StructuredSerializer<TorrentStats> {
       'torrentStatus',
       serializers.serialize(object.torrentStatus,
           specifiedType: const FullType(String)),
+      'running',
+      serializers.serialize(object.running,
+          specifiedType: const FullType(bool)),
     ];
 
     return result;
@@ -42,6 +45,10 @@ class _$TorrentStatsSerializer implements StructuredSerializer<TorrentStats> {
           result.torrentStatus = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'running':
+          result.running = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
       }
     }
 
@@ -52,13 +59,18 @@ class _$TorrentStatsSerializer implements StructuredSerializer<TorrentStats> {
 class _$TorrentStats extends TorrentStats {
   @override
   final String torrentStatus;
+  @override
+  final bool running;
 
   factory _$TorrentStats([void updates(TorrentStatsBuilder b)]) =>
       (new TorrentStatsBuilder()..update(updates)).build();
 
-  _$TorrentStats._({this.torrentStatus}) : super._() {
+  _$TorrentStats._({this.torrentStatus, this.running}) : super._() {
     if (torrentStatus == null) {
       throw new BuiltValueNullFieldError('TorrentStats', 'torrentStatus');
+    }
+    if (running == null) {
+      throw new BuiltValueNullFieldError('TorrentStats', 'running');
     }
   }
 
@@ -72,18 +84,21 @@ class _$TorrentStats extends TorrentStats {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is TorrentStats && torrentStatus == other.torrentStatus;
+    return other is TorrentStats &&
+        torrentStatus == other.torrentStatus &&
+        running == other.running;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, torrentStatus.hashCode));
+    return $jf($jc($jc(0, torrentStatus.hashCode), running.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('TorrentStats')
-          ..add('torrentStatus', torrentStatus))
+          ..add('torrentStatus', torrentStatus)
+          ..add('running', running))
         .toString();
   }
 }
@@ -97,11 +112,16 @@ class TorrentStatsBuilder
   set torrentStatus(String torrentStatus) =>
       _$this._torrentStatus = torrentStatus;
 
+  bool _running;
+  bool get running => _$this._running;
+  set running(bool running) => _$this._running = running;
+
   TorrentStatsBuilder();
 
   TorrentStatsBuilder get _$this {
     if (_$v != null) {
       _torrentStatus = _$v.torrentStatus;
+      _running = _$v.running;
       _$v = null;
     }
     return this;
@@ -122,7 +142,8 @@ class TorrentStatsBuilder
 
   @override
   _$TorrentStats build() {
-    final _$result = _$v ?? new _$TorrentStats._(torrentStatus: torrentStatus);
+    final _$result = _$v ??
+        new _$TorrentStats._(torrentStatus: torrentStatus, running: running);
     replace(_$result);
     return _$result;
   }

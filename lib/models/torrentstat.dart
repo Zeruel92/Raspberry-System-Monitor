@@ -13,6 +13,7 @@ abstract class TorrentStats
     implements Built<TorrentStats, TorrentStatsBuilder> {
   // fields go here
   String get torrentStatus;
+  bool get running;
 
   TorrentStats._();
 

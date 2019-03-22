@@ -12,12 +12,14 @@ class Bloc {
   BehaviorSubject<TorrentStats> _torrentSubject;
   BehaviorSubject _powerOffSubject;
   BehaviorSubject _rebootSubject;
+  BehaviorSubject _torrentToggleSubject;
 
   Sink<InternetAddress> _sinkAddress;
   Sink _sinkUptime;
   Sink _powerOffSink;
   Sink _rebootSink;
   Sink _torrentSink;
+  Sink _torrentToggleSink;
 
   Stream _uptimeStream;
   Stream _torrentStream;
@@ -26,6 +28,7 @@ class Bloc {
   Stream get torrent => _torrentStream;
   Sink get powerOff => _powerOffSink;
   Sink get reboot => _rebootSink;
+  Sink get torrentToggleSink => _torrentToggleSink;
 
   Bloc() {
     _uptimeSubject = new BehaviorSubject();
@@ -33,6 +36,8 @@ class Bloc {
     _powerOffSubject = new BehaviorSubject();
     _rebootSubject = new BehaviorSubject();
     _torrentSubject = new BehaviorSubject();
+    _torrentToggleSubject = new BehaviorSubject();
+    _torrentToggleSink = _torrentToggleSubject.sink;
     _torrentStream = _torrentSubject.stream;
     _torrentSink = _torrentSubject.sink;
     _rebootSink = _rebootSubject.sink;
@@ -44,6 +49,7 @@ class Bloc {
     _indirizzoRaspberrySubject.listen(_addressListener);
     _powerOffSubject.listen(_powerOffListener);
     _rebootSubject.listen(_rebootListener);
+    _torrentToggleSubject.listen(_torrentToggleListener);
   }
 
   void _addressListener(address) async {
@@ -65,12 +71,18 @@ class Bloc {
     print(res.body);
   }
 
+  void _torrentToggleListener(toggle) async {
+    await http.post(
+        'http://${_indirizzoRaspberrySubject.stream.value.address}:8888/torrentToggle/$toggle');
+  }
+
   void close() {
     _uptimeSubject.close();
     _indirizzoRaspberrySubject.close();
     _powerOffSubject.close();
     _torrentSubject.close();
     _torrentSink.close();
+    _torrentToggleSink.close();
     _powerOffSink.close();
     _rebootSubject.close();
     _rebootSink.close();

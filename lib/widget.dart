@@ -82,21 +82,41 @@ class RebootButton extends StatelessWidget {
 
 class TorrentTile extends StatefulWidget {
   final Stream torrent;
-  TorrentTile({this.torrent});
+  final Sink toggle;
+  TorrentTile({this.torrent, this.toggle});
   @override
-  _TorrentTileState createState() => _TorrentTileState(torrent: torrent);
+  _TorrentTileState createState() =>
+      _TorrentTileState(torrent: torrent, toggle: toggle);
 }
 
 class _TorrentTileState extends State<TorrentTile> {
-  Stream torrent;
-  _TorrentTileState({this.torrent});
+  final Stream torrent;
+  final Sink toggle;
+  _TorrentTileState({this.torrent, this.toggle});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: torrent,
       builder: (context, AsyncSnapshot snap) {
-        return Text(snap.data.torrentStatus);
+        if (snap.hasData) {
+          return Row(
+            children: <Widget>[
+              Text(snap.data.torrentStatus),
+              Switch(
+                value: snap.data.running,
+                onChanged: _setTorrent,
+              ),
+              snap.data.running ? Text('Torrent On') : Text('Torrent Off')
+            ],
+          );
+        } else {
+          return Container();
+        }
       },
     );
+  }
+
+  void _setTorrent(bool t) {
+    toggle.add(t);
   }
 }
