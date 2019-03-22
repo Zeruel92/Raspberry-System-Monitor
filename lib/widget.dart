@@ -19,15 +19,40 @@ class _LoadAvgState extends State<LoadAvg> {
         stream: uptimeStream,
         builder: (context, AsyncSnapshot snap) {
           if (snap.hasData) {
+            Color load = Colors.green;
+            Color load5 = Colors.green;
+            Color load15 = Colors.green;
+            if ((snap.data.loadAvg > 2.0) && (snap.data.loadAvg <= 3.0)) {
+              load = Colors.yellow;
+            } else if (snap.data.loadAvg > 3.0) {
+              load = Colors.red;
+            }
+            if ((snap.data.loadAvg5 > 2.0) && (snap.data.loadAvg5 <= 3.0)) {
+              load5 = Colors.yellow;
+            } else if (snap.data.loadAvg5 > 3.0) {
+              load5 = Colors.red;
+            }
+            if ((snap.data.loadAvg15 > 2.0) && (snap.data.loadAvg15 <= 3.0)) {
+              load15 = Colors.yellow;
+            } else if (snap.data.loadAvg15 > 3.0) {
+              load15 = Colors.red;
+            }
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text('Uptime: ${snap.data.time}'),
-                  Text('Current load Avarege: ${snap.data.loadAvg}'),
-                  Text('Last 5 minutes Load Average ${snap.data.loadAvg5}'),
-                  Text('Last 15 minutes Load Average ${snap.data.loadAvg15}')
+                  Text(
+                    'Current load Avarege: ${snap.data.loadAvg}',
+                    style: TextStyle(color: load),
+                  ),
+                  Text(
+                    'Last 5 minutes Load Average ${snap.data.loadAvg5}',
+                    style: TextStyle(color: load5),
+                  ),
+                  Text('Last 15 minutes Load Average ${snap.data.loadAvg15}',
+                      style: TextStyle(color: load15))
                 ],
               ),
             );
