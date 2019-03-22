@@ -4,10 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 
 import 'models/uptime.dart';
+import 'models/torrentstat.dart';
 
 class Bloc {
   BehaviorSubject<Uptime> _uptimeSubject;
   BehaviorSubject<InternetAddress> _indirizzoRaspberrySubject;
+  BehaviorSubject<TorrentStats> _torrentSubject;
   BehaviorSubject _powerOffSubject;
   BehaviorSubject _rebootSubject;
 
@@ -15,10 +17,13 @@ class Bloc {
   Sink _sinkUptime;
   Sink _powerOffSink;
   Sink _rebootSink;
+  Sink _torrentSink;
 
   Stream _uptimeStream;
+  Stream _torrentStream;
 
   Stream get uptime => _uptimeStream;
+  Stream get torrent => _torrentStream;
   Sink get powerOff => _powerOffSink;
   Sink get reboot => _rebootSink;
 
@@ -27,6 +32,9 @@ class Bloc {
     _indirizzoRaspberrySubject = new BehaviorSubject();
     _powerOffSubject = new BehaviorSubject();
     _rebootSubject = new BehaviorSubject();
+    _torrentSubject = new BehaviorSubject();
+    _torrentStream = _torrentSubject.stream;
+    _torrentSink = _torrentSubject.sink;
     _rebootSink = _rebootSubject.sink;
     _powerOffSink = _powerOffSubject.sink;
     _sinkAddress = _indirizzoRaspberrySubject.sink;
@@ -41,6 +49,8 @@ class Bloc {
   void _addressListener(address) async {
     dynamic res = await http.get('http://${address.address}:8888/uptime');
     _sinkUptime.add(Uptime.fromJson(res.body));
+    res = await http.get('http://${address.address}:8888/torrentstatus');
+    _torrentSink.add(TorrentStats.fromJson(res.body));
   }
 
   void _powerOffListener(onValue) async {
@@ -59,6 +69,8 @@ class Bloc {
     _uptimeSubject.close();
     _indirizzoRaspberrySubject.close();
     _powerOffSubject.close();
+    _torrentSubject.close();
+    _torrentSink.close();
     _powerOffSink.close();
     _rebootSubject.close();
     _rebootSink.close();

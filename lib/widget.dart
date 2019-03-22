@@ -79,3 +79,24 @@ class RebootButton extends StatelessWidget {
 
   void _reboot() => rebootSink.add(true);
 }
+
+class TorrentTile extends StatefulWidget {
+  final Stream torrent;
+  TorrentTile({this.torrent});
+  @override
+  _TorrentTileState createState() => _TorrentTileState(torrent: torrent);
+}
+
+class _TorrentTileState extends State<TorrentTile> {
+  Stream torrent;
+  _TorrentTileState({this.torrent});
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: torrent,
+      builder: (context, AsyncSnapshot snap) {
+        return Text(snap.data.torrentStatus);
+      },
+    );
+  }
+}

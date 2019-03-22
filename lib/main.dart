@@ -33,6 +33,9 @@ class _State extends State<MyApp> {
         child: new Column(
           children: <Widget>[
             LoadAvg(uptimeStream: widget.bloc.uptime),
+            TorrentTile(
+              torrent: widget.bloc.torrent,
+            )
           ],
         ),
       ),
