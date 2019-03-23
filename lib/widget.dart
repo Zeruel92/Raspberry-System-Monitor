@@ -37,23 +37,25 @@ class _LoadAvgState extends State<LoadAvg> {
             } else if (snap.data.loadAvg15 > 3.0) {
               load15 = Colors.red;
             }
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text('Uptime: ${snap.data.time}'),
-                  Text(
-                    'Current load Avarege: ${snap.data.loadAvg}',
-                    style: TextStyle(color: load),
-                  ),
-                  Text(
-                    'Last 5 minutes Load Average ${snap.data.loadAvg5}',
-                    style: TextStyle(color: load5),
-                  ),
-                  Text('Last 15 minutes Load Average ${snap.data.loadAvg15}',
-                      style: TextStyle(color: load15))
-                ],
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Uptime: ${snap.data.time}'),
+                    Text(
+                      'Current load Avarege: ${snap.data.loadAvg}',
+                      style: TextStyle(color: load),
+                    ),
+                    Text(
+                      'Last 5 minutes Load Average ${snap.data.loadAvg5}',
+                      style: TextStyle(color: load5),
+                    ),
+                    Text('Last 15 minutes Load Average ${snap.data.loadAvg15}',
+                        style: TextStyle(color: load15))
+                  ],
+                ),
               ),
             );
           } else
@@ -124,15 +126,20 @@ class _TorrentTileState extends State<TorrentTile> {
       stream: torrent,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return Row(
-            children: <Widget>[
-              Text(snap.data.torrentStatus),
-              Switch(
-                value: snap.data.running,
-                onChanged: _setTorrent,
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[
+                  Text(snap.data.torrentStatus),
+                  Switch(
+                    value: snap.data.running,
+                    onChanged: _setTorrent,
+                  ),
+                  snap.data.running ? Text('Torrent On') : Text('Torrent Off')
+                ],
               ),
-              snap.data.running ? Text('Torrent On') : Text('Torrent Off')
-            ],
+            ),
           );
         } else {
           return Container();

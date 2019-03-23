@@ -29,7 +29,7 @@ class _State extends State<MyApp> {
           )
         ],
       ),
-      body: new Container(
+      body: new Center(
         child: new Column(
           children: <Widget>[
             LoadAvg(uptimeStream: widget.bloc.uptime),
