@@ -4,7 +4,8 @@ import 'widget.dart';
 
 void main() {
   Bloc bloc = new Bloc();
-  runApp(new MaterialApp(home: new MyApp(bloc: bloc), theme: ThemeData.dark()));
+  runApp(new MaterialApp(
+      home: new MyApp(bloc: bloc) /*, theme: ThemeData.dark()*/));
 }
 
 class MyApp extends StatefulWidget {
