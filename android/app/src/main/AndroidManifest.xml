@@ -9,8 +9,8 @@
          <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="raspberry_system_monitor"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Raspberrypi System Monitor"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
