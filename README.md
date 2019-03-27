@@ -1,16 +1,16 @@
-# raspberry_system_monitor
+# Raspberry System Monitor
 
-Raspberry System Monitor
+Monitor di sistema che permette l'avvio e lo stop di alcuni servizi che girano sulla raspberry
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Avvia l'app e aspetta che comunichi col sistema.
 
-A few resources to get you started if this is your first Flutter project:
+NB: sulla raspberrry deve essere installato e avviato il server: [Raspberry Server][1]
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+### Status
+[![Codemagic build status](https://api.codemagic.io/apps/5c854d9117fd830009ea0236/5c854d9117fd830009ea0235/status_badge.svg)](https://codemagic.io/apps/5c854d9117fd830009ea0236/5c854d9117fd830009ea0235/latest_build)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+
+[//]: #Links
+[1]: https://github.com/pspgt/Raspberry-System-Monitor-Server
