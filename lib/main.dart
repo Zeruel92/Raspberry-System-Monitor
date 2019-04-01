@@ -32,6 +32,7 @@ class _State extends State<MyApp> {
       body: new Center(
         child: new Column(
           children: <Widget>[
+            AddressTile(address: widget.bloc.address),
             LoadAvg(uptimeStream: widget.bloc.uptime),
             TorrentTile(
               torrent: widget.bloc.torrent,

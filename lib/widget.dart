@@ -198,3 +198,35 @@ class _TeledartTileState extends State<TeledartTile> {
     teledartSink.add(t);
   }
 }
+
+class AddressTile extends StatefulWidget {
+  final Stream address;
+  AddressTile({this.address});
+  @override
+  _AddressTileState createState() => _AddressTileState(address: address);
+}
+
+class _AddressTileState extends State<AddressTile> {
+  final Stream address;
+  _AddressTileState({this.address});
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: address,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[Text('Connesso a: ${snap.data.address}')],
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+}

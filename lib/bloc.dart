@@ -37,6 +37,7 @@ class Bloc {
   Sink get torrentToggleSink => _torrentToggleSink;
   Stream get teledart => _teledartStream;
   Sink get teledartToggleSink => _teledartToggleSink;
+  Stream get address => _indirizzoRaspberrySubject.stream;
 
   Bloc() {
     _uptimeSubject = new BehaviorSubject();
