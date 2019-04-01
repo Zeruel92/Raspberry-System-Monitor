@@ -36,6 +36,10 @@ class _State extends State<MyApp> {
             TorrentTile(
               torrent: widget.bloc.torrent,
               toggle: widget.bloc.torrentToggleSink,
+            ),
+            TeledartTile(
+              teledart: widget.bloc.teledart,
+              teledartSink: widget.bloc.teledartToggleSink,
             )
           ],
         ),

@@ -152,3 +152,49 @@ class _TorrentTileState extends State<TorrentTile> {
     toggle.add(t);
   }
 }
+
+class TeledartTile extends StatefulWidget {
+  final Stream teledart;
+  final Sink teledartSink;
+  TeledartTile({this.teledart, this.teledartSink});
+  @override
+  _TeledartTileState createState() =>
+      _TeledartTileState(teledart: teledart, teledartSink: teledartSink);
+}
+
+class _TeledartTileState extends State<TeledartTile> {
+  final Stream teledart;
+  final Sink teledartSink;
+  _TeledartTileState({this.teledart, this.teledartSink});
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: teledart,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[
+                  Text('Teledart status'),
+                  Switch(
+                    value: snap.data.running,
+                    onChanged: _setTeledart,
+                  ),
+                  snap.data.running ? Text('Teledart On') : Text('Teledart Off')
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  void _setTeledart(bool t) {
+    teledartSink.add(t);
+  }
+}
