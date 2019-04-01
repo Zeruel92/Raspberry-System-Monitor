@@ -177,7 +177,7 @@ class _TeledartTileState extends State<TeledartTile> {
               fit: BoxFit.contain,
               child: Row(
                 children: <Widget>[
-                  Text('Teledart status'),
+                  Icon(Icons.send),
                   Switch(
                     value: snap.data.running,
                     onChanged: _setTeledart,
