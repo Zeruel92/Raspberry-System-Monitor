@@ -5,17 +5,23 @@ class PoweroffBloc {
   BehaviorSubject _powerOffSubject;
   Sink _powerOffSink;
   Sink get sink => _powerOffSink;
-  Stream _address;
 
-  PoweroffBloc(Stream address) {
+  String _addressString;
+
+  PoweroffBloc() {
     _powerOffSubject = new BehaviorSubject();
     _powerOffSink = _powerOffSubject.sink;
     _powerOffSubject.listen(_powerOffListener);
+    _addressString = '';
   }
 
   void _powerOffListener(onValue) async {
-    dynamic res = await http.get('http://${_address.last}:8888/poweroff');
+    dynamic res = await http.get('http://$_addressString:8888/poweroff');
     print(res.body);
+  }
+
+  void update(String address) {
+    _addressString = address;
   }
 
   void close() {

@@ -10,29 +10,29 @@ class TorrentBloc {
   Sink _torrentToggleSink;
 
   Stream _torrentStream;
-  Stream _address;
+  String _addressString;
 
   Stream get stream => _torrentStream;
-
   Sink get sink => _torrentToggleSink;
-  TorrentBloc(Stream address) {
-    _address = address;
+
+  TorrentBloc() {
     _torrentSubject = new BehaviorSubject();
     _torrentToggleSubject = new BehaviorSubject();
-
     _torrentToggleSink = _torrentToggleSubject.sink;
     _torrentStream = _torrentSubject.stream;
     _torrentSink = _torrentSubject.sink;
     _torrentToggleSubject.listen(_torrentToggleListener);
+    _addressString = '';
   }
 
-  void update() async {
-    final res = await http.get('http://${_address.last}:8888/torrentstatus');
+  void update(String address) async {
+    _addressString = address;
+    final res = await http.get('http://$_addressString:8888/torrentstatus');
     _torrentSink.add(TorrentStats.fromJson(res.body));
   }
 
   void _torrentToggleListener(toggle) async {
-    await http.post('http://${_address.last}:8888/torrentToggle/$toggle');
+    await http.post('http://$_addressString:8888/torrentToggle/$toggle');
   }
 
   void close() {

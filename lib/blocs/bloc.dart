@@ -15,28 +15,30 @@ class Bloc {
   TeledartBloc teledart;
   TorrentBloc torrent;
 
-  BehaviorSubject<InternetAddress> _indirizzoRaspberrySubject;
+  BehaviorSubject _indirizzoRaspberrySubject;
 
-  Sink<InternetAddress> _sinkAddress;
+  Sink _sinkAddress;
 
   Stream get address => _indirizzoRaspberrySubject.stream;
 
   Bloc() {
     _indirizzoRaspberrySubject = new BehaviorSubject();
-    uptime = UptimeBloc(address);
-    reboot = RebootBloc(address);
-    poweroff = PoweroffBloc(address);
-    teledart = TeledartBloc(address);
-    torrent = TorrentBloc(address);
+    uptime = UptimeBloc();
+    reboot = RebootBloc();
+    poweroff = PoweroffBloc();
+    teledart = TeledartBloc();
+    torrent = TorrentBloc();
     _sinkAddress = _indirizzoRaspberrySubject.sink;
+    _indirizzoRaspberrySubject.listen((address) => update(address));
     _socketListen();
-    _indirizzoRaspberrySubject.listen(_addressListener);
   }
 
-  void _addressListener(address) async {
+  void update(InternetAddress address) {
     uptime.update(address.address);
-    teledart.update();
-    torrent.update();
+    torrent.update(address.address);
+    teledart.update(address.address);
+    reboot.update(address.address);
+    poweroff.update(address.address);
   }
 
   void close() {
