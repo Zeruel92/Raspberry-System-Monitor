@@ -4,15 +4,17 @@ import 'package:http/http.dart' as http;
 class PoweroffBloc {
   BehaviorSubject _powerOffSubject;
   Sink _powerOffSink;
+  Stream _address;
   Sink get sink => _powerOffSink;
 
   String _addressString;
 
-  PoweroffBloc() {
+  PoweroffBloc(Stream address) {
     _powerOffSubject = new BehaviorSubject();
     _powerOffSink = _powerOffSubject.sink;
     _powerOffSubject.listen(_powerOffListener);
-    _addressString = '';
+    _address = address;
+    _address.listen((address) => _update(address.address));
   }
 
   void _powerOffListener(onValue) async {
@@ -20,7 +22,7 @@ class PoweroffBloc {
     print(res.body);
   }
 
-  void update(String address) {
+  void _update(String address) {
     _addressString = address;
   }
 

@@ -12,24 +12,27 @@ class TeledartBloc {
   Sink _teledartToggleSink;
   Sink _teledartSink;
 
+  Stream _address;
+
   Stream get stream => _teledartStream;
   Sink get sink => _teledartToggleSink;
 
-  TeledartBloc() {
+  TeledartBloc(Stream address) {
     _teledartSubject = new BehaviorSubject();
     _teledartToggleSubject = new BehaviorSubject();
     _teledartToggleSink = _teledartToggleSubject.sink;
     _teledartStream = _teledartSubject.stream;
     _teledartSink = _teledartSubject.sink;
     _teledartToggleSubject.listen(_teledartToggleListener);
-    _addressString = '';
+    _address = address;
+    _address.listen((address) => _update(address.address));
   }
 
   void _teledartToggleListener(toggle) async {
     await http.post('http://$_addressString:8888/teledart/$toggle');
   }
 
-  void update(String address) async {
+  void _update(String address) async {
     _addressString = address;
     final res = await http.get('http://$_addressString:8888/teledart/1');
     _teledartSink.add(Teledart.fromJson(res.body));

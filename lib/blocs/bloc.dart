@@ -23,22 +23,13 @@ class Bloc {
 
   Bloc() {
     _indirizzoRaspberrySubject = new BehaviorSubject();
-    uptime = UptimeBloc();
-    reboot = RebootBloc();
-    poweroff = PoweroffBloc();
-    teledart = TeledartBloc();
-    torrent = TorrentBloc();
+    uptime = UptimeBloc(address);
+    reboot = RebootBloc(address);
+    poweroff = PoweroffBloc(address);
+    teledart = TeledartBloc(address);
+    torrent = TorrentBloc(address);
     _sinkAddress = _indirizzoRaspberrySubject.sink;
-    _indirizzoRaspberrySubject.listen((address) => update(address));
     _socketListen();
-  }
-
-  void update(InternetAddress address) {
-    uptime.update(address.address);
-    torrent.update(address.address);
-    teledart.update(address.address);
-    reboot.update(address.address);
-    poweroff.update(address.address);
   }
 
   void close() {

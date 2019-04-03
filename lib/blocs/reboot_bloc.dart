@@ -4,17 +4,20 @@ import 'package:http/http.dart' as http;
 class RebootBloc {
   BehaviorSubject _rebootSubject;
   Sink _rebootSink;
-  Sink get sink => _rebootSink;
-  String _addressString;
 
-  RebootBloc() {
+  String _addressString;
+  Sink get sink => _rebootSink;
+  Stream _address;
+
+  RebootBloc(Stream address) {
     _rebootSubject = new BehaviorSubject();
     _rebootSink = _rebootSubject.sink;
     _rebootSubject.listen(_rebootListener);
-    _addressString = '';
+    _address = address;
+    _address.listen((address) => _update(address.address));
   }
 
-  void update(String address) {
+  void _update(String address) {
     _addressString = address;
   }
 

@@ -8,16 +8,18 @@ class UptimeBloc {
   Sink _sinkUptime;
 
   Stream _uptimeStream;
-
+  Stream _address;
   Stream get stream => _uptimeStream;
 
-  UptimeBloc() {
+  UptimeBloc(Stream address) {
     _uptimeSubject = new BehaviorSubject();
     _sinkUptime = _uptimeSubject.sink;
     _uptimeStream = _uptimeSubject.stream;
+    _address = address;
+    _address.listen((address) => _update(address.address));
   }
 
-  void update(String address) async {
+  void _update(String address) async {
     final res = await http.get('http://$address:8888/uptime');
     _sinkUptime.add(Uptime.fromJson(res.body));
   }
