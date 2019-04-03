@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:raspberry_system_monitor/blocs/poweroff.dart';
-import 'package:raspberry_system_monitor/blocs/reboot.dart';
+import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
+import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/uptime_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
