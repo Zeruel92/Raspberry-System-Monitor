@@ -40,7 +40,7 @@ class _State extends State<MyApp> {
       appBar: new AppBar(
         title: new Text('Raspberry System Monitor'),
         actions: <Widget>[
-          PowerOffButton(powerOffSink: widget.bloc.powerOff),
+          PowerOffButton(powerOffSink: widget.bloc.poweroff.sink),
           RebootButton(
             rebootSink: widget.bloc.reboot.sink,
           )

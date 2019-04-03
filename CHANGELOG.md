@@ -1,3 +1,6 @@
+## 1.0.0+7
+Refactoring + build on desktop
+
 ## 1.0.0+6
 Aggiunto indirizzo rapsberry
 

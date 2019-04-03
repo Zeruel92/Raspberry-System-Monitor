@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:raspberry_system_monitor/blocs/poweroff.dart';
 import 'package:raspberry_system_monitor/blocs/reboot.dart';
 import 'package:raspberry_system_monitor/blocs/uptime_bloc.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,18 +12,16 @@ import 'package:raspberry_system_monitor/models/teledart.dart';
 class Bloc {
   UptimeBloc uptime;
   RebootBloc reboot;
+  PoweroffBloc poweroff;
 
   BehaviorSubject<InternetAddress> _indirizzoRaspberrySubject;
   BehaviorSubject<TorrentStats> _torrentSubject;
-  BehaviorSubject _powerOffSubject;
 
   BehaviorSubject _torrentToggleSubject;
   BehaviorSubject _teledartSubject;
   BehaviorSubject _teledartToggleSubject;
 
   Sink<InternetAddress> _sinkAddress;
-
-  Sink _powerOffSink;
 
   Sink _torrentSink;
   Sink _torrentToggleSink;
@@ -33,7 +32,6 @@ class Bloc {
   Stream _teledartStream;
 
   Stream get torrent => _torrentStream;
-  Sink get powerOff => _powerOffSink;
 
   Sink get torrentToggleSink => _torrentToggleSink;
   Stream get teledart => _teledartStream;
@@ -45,8 +43,7 @@ class Bloc {
 
     uptime = UptimeBloc();
     reboot = RebootBloc(address);
-
-    _powerOffSubject = new BehaviorSubject();
+    poweroff = PoweroffBloc(address);
 
     _torrentSubject = new BehaviorSubject();
     _torrentToggleSubject = new BehaviorSubject();
@@ -56,7 +53,6 @@ class Bloc {
     _torrentStream = _torrentSubject.stream;
     _torrentSink = _torrentSubject.sink;
 
-    _powerOffSink = _powerOffSubject.sink;
     _sinkAddress = _indirizzoRaspberrySubject.sink;
 
     _teledartToggleSink = _teledartToggleSubject.sink;
@@ -65,7 +61,6 @@ class Bloc {
     _teledartToggleSubject.listen(_teledartToggleListener);
     _socketListen();
     _indirizzoRaspberrySubject.listen(_addressListener);
-    _powerOffSubject.listen(_powerOffListener);
 
     _torrentToggleSubject.listen(_torrentToggleListener);
   }
@@ -81,12 +76,6 @@ class Bloc {
     _teledartSink.add(Teledart.fromJson(res.body));
   }
 
-  void _powerOffListener(onValue) async {
-    dynamic res = await http.get(
-        'http://${_indirizzoRaspberrySubject.stream.value.address}:8888/poweroff');
-    print(res.body);
-  }
-
   void _torrentToggleListener(toggle) async {
     await http.post(
         'http://${_indirizzoRaspberrySubject.stream.value.address}:8888/torrentToggle/$toggle');
@@ -99,13 +88,15 @@ class Bloc {
 
   void close() {
     uptime.close();
+    poweroff.close();
+    reboot.close();
+
     _indirizzoRaspberrySubject.close();
-    _powerOffSubject.close();
+
     _torrentSubject.close();
     _torrentSink.close();
     _torrentToggleSink.close();
-    _powerOffSink.close();
-    reboot.close();
+
     _sinkAddress.close();
     _teledartSubject.close();
     _teledartToggleSink.close();
