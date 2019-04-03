@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 class LoadAvg extends StatefulWidget {
-  final Stream uptimeStream;
-  LoadAvg({this.uptimeStream});
+  final Stream stream;
+  LoadAvg({this.stream});
   @override
-  _LoadAvgState createState() => _LoadAvgState(uptimeStream: uptimeStream);
+  _LoadAvgState createState() => _LoadAvgState(stream: stream);
 }
 
 class _LoadAvgState extends State<LoadAvg> {
-  final Stream uptimeStream;
+  final Stream stream;
 
-  _LoadAvgState({this.uptimeStream});
+  _LoadAvgState({this.stream});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: StreamBuilder(
-        stream: uptimeStream,
+        stream: stream,
         builder: (context, AsyncSnapshot snap) {
           if (snap.hasData) {
             Color load = Colors.green;
@@ -76,9 +76,9 @@ class _LoadAvgState extends State<LoadAvg> {
 }
 
 class PowerOffButton extends StatelessWidget {
-  final Sink powerOffSink;
+  final Sink sink;
 
-  PowerOffButton({this.powerOffSink});
+  PowerOffButton({this.sink});
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +88,13 @@ class PowerOffButton extends StatelessWidget {
     );
   }
 
-  void _powerOff() => powerOffSink.add(true);
+  void _powerOff() => sink.add(true);
 }
 
 class RebootButton extends StatelessWidget {
-  final Sink rebootSink;
+  final Sink sink;
 
-  RebootButton({this.rebootSink});
+  RebootButton({this.sink});
 
   @override
   Widget build(BuildContext context) {
@@ -104,26 +104,26 @@ class RebootButton extends StatelessWidget {
     );
   }
 
-  void _reboot() => rebootSink.add(true);
+  void _reboot() => sink.add(true);
 }
 
 class TorrentTile extends StatefulWidget {
-  final Stream torrent;
-  final Sink toggle;
-  TorrentTile({this.torrent, this.toggle});
+  final Stream stream;
+  final Sink sink;
+  TorrentTile({this.stream, this.sink});
   @override
   _TorrentTileState createState() =>
-      _TorrentTileState(torrent: torrent, toggle: toggle);
+      _TorrentTileState(stream: stream, sink: sink);
 }
 
 class _TorrentTileState extends State<TorrentTile> {
-  final Stream torrent;
-  final Sink toggle;
-  _TorrentTileState({this.torrent, this.toggle});
+  final Stream stream;
+  final Sink sink;
+  _TorrentTileState({this.stream, this.sink});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: torrent,
+      stream: stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -149,27 +149,27 @@ class _TorrentTileState extends State<TorrentTile> {
   }
 
   void _setTorrent(bool t) {
-    toggle.add(t);
+    sink.add(t);
   }
 }
 
 class TeledartTile extends StatefulWidget {
-  final Stream teledart;
-  final Sink teledartSink;
-  TeledartTile({this.teledart, this.teledartSink});
+  final Stream stream;
+  final Sink sink;
+  TeledartTile({this.stream, this.sink});
   @override
   _TeledartTileState createState() =>
-      _TeledartTileState(teledart: teledart, teledartSink: teledartSink);
+      _TeledartTileState(stream: stream, sink: sink);
 }
 
 class _TeledartTileState extends State<TeledartTile> {
-  final Stream teledart;
-  final Sink teledartSink;
-  _TeledartTileState({this.teledart, this.teledartSink});
+  final Stream stream;
+  final Sink sink;
+  _TeledartTileState({this.stream, this.sink});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: teledart,
+      stream: stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -195,24 +195,24 @@ class _TeledartTileState extends State<TeledartTile> {
   }
 
   void _setTeledart(bool t) {
-    teledartSink.add(t);
+    sink.add(t);
   }
 }
 
 class AddressTile extends StatefulWidget {
-  final Stream address;
-  AddressTile({this.address});
+  final Stream stream;
+  AddressTile({this.stream});
   @override
-  _AddressTileState createState() => _AddressTileState(address: address);
+  _AddressTileState createState() => _AddressTileState(stream: stream);
 }
 
 class _AddressTileState extends State<AddressTile> {
-  final Stream address;
-  _AddressTileState({this.address});
+  final Stream stream;
+  _AddressTileState({this.stream});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: address,
+      stream: stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(

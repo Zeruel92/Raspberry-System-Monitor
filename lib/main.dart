@@ -40,24 +40,24 @@ class _State extends State<MyApp> {
       appBar: new AppBar(
         title: new Text('Raspberry System Monitor'),
         actions: <Widget>[
-          PowerOffButton(powerOffSink: widget.bloc.poweroff.sink),
+          PowerOffButton(sink: widget.bloc.poweroff.sink),
           RebootButton(
-            rebootSink: widget.bloc.reboot.sink,
+            sink: widget.bloc.reboot.sink,
           )
         ],
       ),
       body: new Center(
         child: new Column(
           children: <Widget>[
-            AddressTile(address: widget.bloc.address),
-            LoadAvg(uptimeStream: widget.bloc.uptime.stream),
+            AddressTile(stream: widget.bloc.address),
+            LoadAvg(stream: widget.bloc.uptime.stream),
             TorrentTile(
-              torrent: widget.bloc.torrent,
-              toggle: widget.bloc.torrentToggleSink,
+              stream: widget.bloc.torrent.stream,
+              sink: widget.bloc.torrent.sink,
             ),
             TeledartTile(
-              teledart: widget.bloc.teledart,
-              teledartSink: widget.bloc.teledartToggleSink,
+              stream: widget.bloc.teledart.stream,
+              sink: widget.bloc.teledart.sink,
             )
           ],
         ),
