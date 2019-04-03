@@ -1,49 +1,53 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:raspberry_system_monitor/blocs/reboot.dart';
+import 'package:raspberry_system_monitor/blocs/uptime_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'models/uptime.dart';
-import 'models/torrentstat.dart';
-import 'models/teledart.dart';
+import 'package:raspberry_system_monitor/models/torrentstat.dart';
+import 'package:raspberry_system_monitor/models/teledart.dart';
 
 class Bloc {
-  BehaviorSubject<Uptime> _uptimeSubject;
+  UptimeBloc uptime;
+  RebootBloc reboot;
+
   BehaviorSubject<InternetAddress> _indirizzoRaspberrySubject;
   BehaviorSubject<TorrentStats> _torrentSubject;
   BehaviorSubject _powerOffSubject;
-  BehaviorSubject _rebootSubject;
+
   BehaviorSubject _torrentToggleSubject;
   BehaviorSubject _teledartSubject;
   BehaviorSubject _teledartToggleSubject;
 
   Sink<InternetAddress> _sinkAddress;
-  Sink _sinkUptime;
+
   Sink _powerOffSink;
-  Sink _rebootSink;
+
   Sink _torrentSink;
   Sink _torrentToggleSink;
   Sink _teledartToggleSink;
   Sink _teledartSink;
 
-  Stream _uptimeStream;
   Stream _torrentStream;
   Stream _teledartStream;
 
-  Stream get uptime => _uptimeStream;
   Stream get torrent => _torrentStream;
   Sink get powerOff => _powerOffSink;
-  Sink get reboot => _rebootSink;
+
   Sink get torrentToggleSink => _torrentToggleSink;
   Stream get teledart => _teledartStream;
   Sink get teledartToggleSink => _teledartToggleSink;
   Stream get address => _indirizzoRaspberrySubject.stream;
 
   Bloc() {
-    _uptimeSubject = new BehaviorSubject();
     _indirizzoRaspberrySubject = new BehaviorSubject();
+
+    uptime = UptimeBloc();
+    reboot = RebootBloc(address);
+
     _powerOffSubject = new BehaviorSubject();
-    _rebootSubject = new BehaviorSubject();
+
     _torrentSubject = new BehaviorSubject();
     _torrentToggleSubject = new BehaviorSubject();
     _teledartSubject = new BehaviorSubject();
@@ -51,11 +55,10 @@ class Bloc {
     _torrentToggleSink = _torrentToggleSubject.sink;
     _torrentStream = _torrentSubject.stream;
     _torrentSink = _torrentSubject.sink;
-    _rebootSink = _rebootSubject.sink;
+
     _powerOffSink = _powerOffSubject.sink;
     _sinkAddress = _indirizzoRaspberrySubject.sink;
-    _sinkUptime = _uptimeSubject.sink;
-    _uptimeStream = _uptimeSubject.stream;
+
     _teledartToggleSink = _teledartToggleSubject.sink;
     _teledartStream = _teledartSubject.stream;
     _teledartSink = _teledartSubject.sink;
@@ -63,13 +66,15 @@ class Bloc {
     _socketListen();
     _indirizzoRaspberrySubject.listen(_addressListener);
     _powerOffSubject.listen(_powerOffListener);
-    _rebootSubject.listen(_rebootListener);
+
     _torrentToggleSubject.listen(_torrentToggleListener);
   }
 
   void _addressListener(address) async {
-    dynamic res = await http.get('http://${address.address}:8888/uptime');
-    _sinkUptime.add(Uptime.fromJson(res.body));
+    dynamic res;
+
+    uptime.update(address.address);
+
     res = await http.get('http://${address.address}:8888/torrentstatus');
     _torrentSink.add(TorrentStats.fromJson(res.body));
     res = await http.get('http://${address.address}:8888/teledart/1');
@@ -79,12 +84,6 @@ class Bloc {
   void _powerOffListener(onValue) async {
     dynamic res = await http.get(
         'http://${_indirizzoRaspberrySubject.stream.value.address}:8888/poweroff');
-    print(res.body);
-  }
-
-  void _rebootListener(onValue) async {
-    dynamic res = await http.get(
-        'http://${_indirizzoRaspberrySubject.stream.value.address}:8888/reboot');
     print(res.body);
   }
 
@@ -99,17 +98,15 @@ class Bloc {
   }
 
   void close() {
-    _uptimeSubject.close();
+    uptime.close();
     _indirizzoRaspberrySubject.close();
     _powerOffSubject.close();
     _torrentSubject.close();
     _torrentSink.close();
     _torrentToggleSink.close();
     _powerOffSink.close();
-    _rebootSubject.close();
-    _rebootSink.close();
+    reboot.close();
     _sinkAddress.close();
-    _sinkUptime.close();
     _teledartSubject.close();
     _teledartToggleSink.close();
   }

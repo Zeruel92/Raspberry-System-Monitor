@@ -1,10 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:raspberry_system_monitor/bloc.dart';
+import 'package:flutter/foundation.dart'
+    show debugDefaultTargetPlatformOverride;
+import 'package:raspberry_system_monitor/blocs/bloc.dart';
 import 'widget.dart';
 
 void main() {
   Bloc bloc = new Bloc();
+  _setTargetPlatformForDesktop();
   runApp(new MaterialApp(home: new MyApp(bloc: bloc), theme: ThemeData.dark()));
+}
+
+void _setTargetPlatformForDesktop() {
+  TargetPlatform targetPlatform;
+  if (Platform.isMacOS) {
+    targetPlatform = TargetPlatform.iOS;
+  } else if (Platform.isLinux || Platform.isWindows) {
+    targetPlatform = TargetPlatform.android;
+  }
+  if (targetPlatform != null) {
+    debugDefaultTargetPlatformOverride = targetPlatform;
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -25,7 +42,7 @@ class _State extends State<MyApp> {
         actions: <Widget>[
           PowerOffButton(powerOffSink: widget.bloc.powerOff),
           RebootButton(
-            rebootSink: widget.bloc.reboot,
+            rebootSink: widget.bloc.reboot.sink,
           )
         ],
       ),
@@ -33,7 +50,7 @@ class _State extends State<MyApp> {
         child: new Column(
           children: <Widget>[
             AddressTile(address: widget.bloc.address),
-            LoadAvg(uptimeStream: widget.bloc.uptime),
+            LoadAvg(uptimeStream: widget.bloc.uptime.stream),
             TorrentTile(
               torrent: widget.bloc.torrent,
               toggle: widget.bloc.torrentToggleSink,
