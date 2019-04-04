@@ -230,3 +230,53 @@ class _AddressTileState extends State<AddressTile> {
     );
   }
 }
+
+class SambaTile extends StatefulWidget {
+  final Stream stream;
+  final Sink sink;
+
+  SambaTile({this.stream, this.sink});
+
+  @override
+  _SambaTileState createState() => _SambaTileState(stream: stream, sink: sink);
+}
+
+class _SambaTileState extends State<SambaTile> {
+  final Stream stream;
+  final Sink sink;
+
+  _SambaTileState({this.stream, this.sink});
+
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: stream,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.people_outline),
+                  Switch(
+                    value: snap.data.running,
+                    onChanged: _setSamba,
+                  ),
+                  snap.data.running ? Text('Samba On') : Text('Samba Off')
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  void _setSamba(bool t) {
+    sink.add(t);
+  }
+}

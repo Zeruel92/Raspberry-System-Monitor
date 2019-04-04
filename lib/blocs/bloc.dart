@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
+import 'package:raspberry_system_monitor/blocs/samba_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/teledard_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/torrent_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/uptime_bloc.dart';
@@ -14,6 +15,7 @@ class Bloc {
   PoweroffBloc poweroff;
   TeledartBloc teledart;
   TorrentBloc torrent;
+  SambaBloc samba;
 
   BehaviorSubject _indirizzoRaspberrySubject;
 
@@ -28,6 +30,7 @@ class Bloc {
     poweroff = PoweroffBloc(address);
     teledart = TeledartBloc(address);
     torrent = TorrentBloc(address);
+    samba = SambaBloc(address);
     _sinkAddress = _indirizzoRaspberrySubject.sink;
     _socketListen();
   }
@@ -38,6 +41,7 @@ class Bloc {
     reboot.close();
     teledart.close();
     torrent.close();
+    samba.close();
     _indirizzoRaspberrySubject.close();
     _sinkAddress.close();
   }

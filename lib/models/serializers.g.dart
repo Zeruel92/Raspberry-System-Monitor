@@ -7,6 +7,7 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Samba.serializer)
       ..add(Teledart.serializer)
       ..add(TorrentStats.serializer)
       ..add(Uptime.serializer))

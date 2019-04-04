@@ -58,7 +58,11 @@ class _State extends State<MyApp> {
             TeledartTile(
               stream: widget.bloc.teledart.stream,
               sink: widget.bloc.teledart.sink,
-            )
+            ),
+            SambaTile(
+              stream: widget.bloc.samba.stream,
+              sink: widget.bloc.samba.sink,
+            ),
           ],
         ),
       ),
