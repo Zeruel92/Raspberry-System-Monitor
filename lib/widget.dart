@@ -148,9 +148,7 @@ class _TorrentTileState extends State<TorrentTile> {
     );
   }
 
-  void _setTorrent(bool t) {
-    sink.add(t);
-  }
+  void _setTorrent(bool t) => sink.add(t);
 }
 
 class TeledartTile extends StatefulWidget {
@@ -194,9 +192,7 @@ class _TeledartTileState extends State<TeledartTile> {
     );
   }
 
-  void _setTeledart(bool t) {
-    sink.add(t);
-  }
+  void _setTeledart(bool t) => sink.add(t);
 }
 
 class AddressTile extends StatefulWidget {
@@ -248,7 +244,6 @@ class _SambaTileState extends State<SambaTile> {
   _SambaTileState({this.stream, this.sink});
 
   @override
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: stream,
@@ -276,7 +271,5 @@ class _SambaTileState extends State<SambaTile> {
     );
   }
 
-  void _setSamba(bool t) {
-    sink.add(t);
-  }
+  void _setSamba(bool t) => sink.add(t);
 }

@@ -44,4 +44,6 @@ class SambaBloc {
     _toggleSubject.close();
     _subject.close();
   }
+
+  //TODO check url samba
 }
