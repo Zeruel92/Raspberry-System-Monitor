@@ -64,4 +64,10 @@ class _State extends State<MyApp> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    widget.bloc.close();
+    super.dispose();
+  }
 }
