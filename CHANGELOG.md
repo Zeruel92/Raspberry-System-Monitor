@@ -1,3 +1,6 @@
+## 1.0.0+8
+Samba widget
+
 ## 1.0.0+7
 Refactoring + build on desktop
 
