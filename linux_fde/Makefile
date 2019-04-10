@@ -29,7 +29,7 @@ PLUGIN_NAMES=color_panel file_chooser menubar
 # Currently this only sets NDEBUG, which is used to control the flags passed
 # to the Flutter engine in the example shell, and not the complation settings
 # (e.g., optimization level) of the C++ code.
-BUILD:=debug
+BUILD:=release
 
 # Dependency locations
 FLUTTER_APP_DIR=$(CURDIR)/..
@@ -75,7 +75,7 @@ OUT_DIR=$(FLUTTER_APP_BUILD_DIR)/linux_fde/$(BUILD)
 OUT_DATA_DIR=$(OUT_DIR)/data
 OUT_LIB_DIR=$(OUT_DIR)/lib
 
-BIN_OUT=$(OUT_DIR)/flutter_embedder_example
+BIN_OUT=$(OUT_DIR)/raspberryMonitor
 ICU_DATA_OUT=$(OUT_DATA_DIR)/$(ICU_DATA_NAME)
 ALL_LIBS_OUT=$(foreach lib,$(ALL_LIBS),$(OUT_LIB_DIR)/$(notdir $(lib)))
 
