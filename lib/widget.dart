@@ -9,7 +9,7 @@ class LoadAvg extends StatefulWidget {
 
 class _LoadAvgState extends State<LoadAvg> {
   final Stream stream;
-
+  //TODO: adding temp in °C info
   _LoadAvgState({this.stream});
 
   @override
