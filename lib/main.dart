@@ -41,9 +41,7 @@ class _State extends State<MyApp> {
         title: new Text('Raspberry System Monitor'),
         actions: <Widget>[
           PowerOffButton(sink: widget.bloc.poweroff.sink),
-          RebootButton(
-            sink: widget.bloc.reboot.sink,
-          )
+          RebootButton(sink: widget.bloc.reboot.sink)
         ],
       ),
       body: new Center(
