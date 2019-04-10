@@ -1,3 +1,6 @@
+## 1.0.0+9
+SSH widget
+
 ## 1.0.0+8
 Samba widget
 
