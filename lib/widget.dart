@@ -37,7 +37,7 @@ class _LoadAvgState extends State<LoadAvg> {
             } else if (snap.data.loadAvg15 > 3.0) {
               load15 = Colors.red;
             }
-            if (snap.data.temp > 50.0) {
+            if ((snap.data.temp > 50.0) && (snap.data.temp <= 80.0)) {
               temp = Colors.yellow;
             } else if (snap.data.temp > 80.0) {
               temp = Colors.red;
