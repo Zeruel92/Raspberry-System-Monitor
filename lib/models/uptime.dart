@@ -12,6 +12,7 @@ abstract class Uptime implements Built<Uptime, UptimeBuilder> {
   double get loadAvg;
   double get loadAvg5;
   double get loadAvg15;
+  double get temp;
 
   Uptime._();
 

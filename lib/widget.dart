@@ -9,7 +9,6 @@ class LoadAvg extends StatefulWidget {
 
 class _LoadAvgState extends State<LoadAvg> {
   final Stream stream;
-  //TODO: adding temp in °C info
   _LoadAvgState({this.stream});
 
   @override
@@ -22,6 +21,7 @@ class _LoadAvgState extends State<LoadAvg> {
             Color load = Colors.green;
             Color load5 = Colors.green;
             Color load15 = Colors.green;
+            Color temp = Colors.green;
             if ((snap.data.loadAvg > 2.0) && (snap.data.loadAvg <= 3.0)) {
               load = Colors.yellow;
             } else if (snap.data.loadAvg > 3.0) {
@@ -36,6 +36,11 @@ class _LoadAvgState extends State<LoadAvg> {
               load15 = Colors.yellow;
             } else if (snap.data.loadAvg15 > 3.0) {
               load15 = Colors.red;
+            }
+            if (snap.data.temp > 50.0) {
+              temp = Colors.yellow;
+            } else if (snap.data.temp > 80.0) {
+              temp = Colors.red;
             }
             return Card(
               child: Padding(
@@ -53,7 +58,9 @@ class _LoadAvgState extends State<LoadAvg> {
                       style: TextStyle(color: load5),
                     ),
                     Text('Last 15 minutes Load Average ${snap.data.loadAvg15}',
-                        style: TextStyle(color: load15))
+                        style: TextStyle(color: load15)),
+                    Text('System Core temperature ${snap.data.temp} °C',
+                        style: TextStyle(color: temp))
                   ],
                 ),
               ),

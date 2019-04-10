@@ -29,6 +29,8 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
       'loadAvg15',
       serializers.serialize(object.loadAvg15,
           specifiedType: const FullType(double)),
+      'temp',
+      serializers.serialize(object.temp, specifiedType: const FullType(double)),
     ];
 
     return result;
@@ -61,6 +63,10 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
           result.loadAvg15 = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
           break;
+        case 'temp':
+          result.temp = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
       }
     }
 
@@ -77,11 +83,14 @@ class _$Uptime extends Uptime {
   final double loadAvg5;
   @override
   final double loadAvg15;
+  @override
+  final double temp;
 
   factory _$Uptime([void updates(UptimeBuilder b)]) =>
       (new UptimeBuilder()..update(updates)).build();
 
-  _$Uptime._({this.time, this.loadAvg, this.loadAvg5, this.loadAvg15})
+  _$Uptime._(
+      {this.time, this.loadAvg, this.loadAvg5, this.loadAvg15, this.temp})
       : super._() {
     if (time == null) {
       throw new BuiltValueNullFieldError('Uptime', 'time');
@@ -94,6 +103,9 @@ class _$Uptime extends Uptime {
     }
     if (loadAvg15 == null) {
       throw new BuiltValueNullFieldError('Uptime', 'loadAvg15');
+    }
+    if (temp == null) {
+      throw new BuiltValueNullFieldError('Uptime', 'temp');
     }
   }
 
@@ -111,14 +123,18 @@ class _$Uptime extends Uptime {
         time == other.time &&
         loadAvg == other.loadAvg &&
         loadAvg5 == other.loadAvg5 &&
-        loadAvg15 == other.loadAvg15;
+        loadAvg15 == other.loadAvg15 &&
+        temp == other.temp;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, time.hashCode), loadAvg.hashCode), loadAvg5.hashCode),
-        loadAvg15.hashCode));
+        $jc(
+            $jc($jc($jc(0, time.hashCode), loadAvg.hashCode),
+                loadAvg5.hashCode),
+            loadAvg15.hashCode),
+        temp.hashCode));
   }
 
   @override
@@ -127,7 +143,8 @@ class _$Uptime extends Uptime {
           ..add('time', time)
           ..add('loadAvg', loadAvg)
           ..add('loadAvg5', loadAvg5)
-          ..add('loadAvg15', loadAvg15))
+          ..add('loadAvg15', loadAvg15)
+          ..add('temp', temp))
         .toString();
   }
 }
@@ -151,6 +168,10 @@ class UptimeBuilder implements Builder<Uptime, UptimeBuilder> {
   double get loadAvg15 => _$this._loadAvg15;
   set loadAvg15(double loadAvg15) => _$this._loadAvg15 = loadAvg15;
 
+  double _temp;
+  double get temp => _$this._temp;
+  set temp(double temp) => _$this._temp = temp;
+
   UptimeBuilder();
 
   UptimeBuilder get _$this {
@@ -159,6 +180,7 @@ class UptimeBuilder implements Builder<Uptime, UptimeBuilder> {
       _loadAvg = _$v.loadAvg;
       _loadAvg5 = _$v.loadAvg5;
       _loadAvg15 = _$v.loadAvg15;
+      _temp = _$v.temp;
       _$v = null;
     }
     return this;
@@ -184,7 +206,8 @@ class UptimeBuilder implements Builder<Uptime, UptimeBuilder> {
             time: time,
             loadAvg: loadAvg,
             loadAvg5: loadAvg5,
-            loadAvg15: loadAvg15);
+            loadAvg15: loadAvg15,
+            temp: temp);
     replace(_$result);
     return _$result;
   }
