@@ -3,8 +3,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 
 class SambaBloc {
-  BehaviorSubject _subject;
-  BehaviorSubject _toggleSubject;
+  BehaviorSubject<Samba> _subject;
+  BehaviorSubject<bool> _toggleSubject;
 
   Stream _stream;
   String _addressString;
@@ -18,7 +18,8 @@ class SambaBloc {
   Sink get sink => _tSink;
 
   SambaBloc(Stream address) {
-    _subject = new BehaviorSubject();
+    _subject =
+        new BehaviorSubject.seeded(Samba((samba) => samba..running = false));
     _toggleSubject = new BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;

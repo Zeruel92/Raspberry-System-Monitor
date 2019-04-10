@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class TorrentBloc {
   BehaviorSubject<TorrentStats> _torrentSubject;
-  BehaviorSubject _torrentToggleSubject;
+  BehaviorSubject<bool> _torrentToggleSubject;
 
   Sink _torrentSink;
   Sink _torrentToggleSink;
@@ -18,7 +18,9 @@ class TorrentBloc {
   Sink get sink => _torrentToggleSink;
 
   TorrentBloc(Stream address) {
-    _torrentSubject = new BehaviorSubject();
+    _torrentSubject = BehaviorSubject.seeded(TorrentStats((t) => t
+      ..running = false
+      ..torrentStatus = ''));
     _torrentToggleSubject = new BehaviorSubject();
     _torrentToggleSink = _torrentToggleSubject.sink;
     _torrentStream = _torrentSubject.stream;

@@ -4,7 +4,7 @@ import 'package:raspberry_system_monitor/models/teledart.dart';
 
 class TeledartBloc {
   BehaviorSubject<Teledart> _teledartSubject;
-  BehaviorSubject _teledartToggleSubject;
+  BehaviorSubject<bool> _teledartToggleSubject;
 
   Stream _teledartStream;
   String _addressString;
@@ -18,7 +18,8 @@ class TeledartBloc {
   Sink get sink => _teledartToggleSink;
 
   TeledartBloc(Stream address) {
-    _teledartSubject = new BehaviorSubject();
+    _teledartSubject =
+        new BehaviorSubject.seeded(Teledart((t) => t..running = false));
     _teledartToggleSubject = new BehaviorSubject();
     _teledartToggleSink = _teledartToggleSubject.sink;
     _teledartStream = _teledartSubject.stream;
