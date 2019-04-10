@@ -273,3 +273,47 @@ class _SambaTileState extends State<SambaTile> {
 
   void _setSamba(bool t) => sink.add(t);
 }
+
+class SSHTile extends StatefulWidget {
+  final Stream stream;
+  final Sink sink;
+  SSHTile({this.stream, this.sink});
+  @override
+  _SSHTileState createState() => _SSHTileState(stream: stream, sink: sink);
+}
+
+class _SSHTileState extends State<SSHTile> {
+  final Stream stream;
+  final Sink sink;
+  _SSHTileState({this.stream, this.sink});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: stream,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.people_outline),
+                  Switch(
+                    value: snap.data.running,
+                    onChanged: _setSSH,
+                  ),
+                  snap.data.running ? Text('SSH On') : Text('SSH Off')
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  void _setSSH(bool t) => sink.add(t);
+}

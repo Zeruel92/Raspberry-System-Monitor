@@ -63,6 +63,10 @@ class _State extends State<MyApp> {
               stream: widget.bloc.samba.stream,
               sink: widget.bloc.samba.sink,
             ),
+            SSHTile(
+              stream: widget.bloc.ssh.stream,
+              sink: widget.bloc.ssh.sink,
+            ),
           ],
         ),
       ),
