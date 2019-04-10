@@ -9,6 +9,6 @@ import 'teledart.dart';
 import 'samba.dart';
 part 'serializers.g.dart';
 
-@SerializersFor(const [Uptime, TorrentStats, Teledart, Samba, SSH])
+@SerializersFor(const [Uptime, TorrentStats, Teledart, Samba, SSHStatus])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

@@ -1,28 +1,28 @@
 library ssh;
 
 import 'dart:convert';
-
-import 'package:build_daemon/data/serializers.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'serializers.dart';
 
 part 'ssh.g.dart';
 
-abstract class SSH implements Built<SSH, SSHBuilder> {
+abstract class SSHStatus implements Built<SSHStatus, SSHStatusBuilder> {
   // fields go here
   bool get running;
 
-  SSH._();
+  SSHStatus._();
 
-  factory SSH([updates(SSHBuilder b)]) = _$SSH;
+  factory SSHStatus([updates(SSHStatusBuilder b)]) = _$SSHStatus;
 
   String toJson() {
-    return json.encode(serializers.serializeWith(SSH.serializer, this));
+    return json.encode(serializers.serializeWith(SSHStatus.serializer, this));
   }
 
-  static SSH fromJson(String jsonString) {
-    return serializers.deserializeWith(SSH.serializer, json.decode(jsonString));
+  static SSHStatus fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        SSHStatus.serializer, json.decode(jsonString));
   }
 
-  static Serializer<SSH> get serializer => _$sSHSerializer;
+  static Serializer<SSHStatus> get serializer => _$sSHStatusSerializer;
 }

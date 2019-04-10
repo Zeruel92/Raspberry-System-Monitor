@@ -6,16 +6,16 @@ part of ssh;
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<SSH> _$sSHSerializer = new _$SSHSerializer();
+Serializer<SSHStatus> _$sSHStatusSerializer = new _$SSHStatusSerializer();
 
-class _$SSHSerializer implements StructuredSerializer<SSH> {
+class _$SSHStatusSerializer implements StructuredSerializer<SSHStatus> {
   @override
-  final Iterable<Type> types = const [SSH, _$SSH];
+  final Iterable<Type> types = const [SSHStatus, _$SSHStatus];
   @override
-  final String wireName = 'SSH';
+  final String wireName = 'SSHStatus';
 
   @override
-  Iterable serialize(Serializers serializers, SSH object,
+  Iterable serialize(Serializers serializers, SSHStatus object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'running',
@@ -27,9 +27,9 @@ class _$SSHSerializer implements StructuredSerializer<SSH> {
   }
 
   @override
-  SSH deserialize(Serializers serializers, Iterable serialized,
+  SSHStatus deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new SSHBuilder();
+    final result = new SSHStatusBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -48,30 +48,30 @@ class _$SSHSerializer implements StructuredSerializer<SSH> {
   }
 }
 
-class _$SSH extends SSH {
+class _$SSHStatus extends SSHStatus {
   @override
   final bool running;
 
-  factory _$SSH([void updates(SSHBuilder b)]) =>
-      (new SSHBuilder()..update(updates)).build();
+  factory _$SSHStatus([void updates(SSHStatusBuilder b)]) =>
+      (new SSHStatusBuilder()..update(updates)).build();
 
-  _$SSH._({this.running}) : super._() {
+  _$SSHStatus._({this.running}) : super._() {
     if (running == null) {
-      throw new BuiltValueNullFieldError('SSH', 'running');
+      throw new BuiltValueNullFieldError('SSHStatus', 'running');
     }
   }
 
   @override
-  SSH rebuild(void updates(SSHBuilder b)) =>
+  SSHStatus rebuild(void updates(SSHStatusBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  SSHBuilder toBuilder() => new SSHBuilder()..replace(this);
+  SSHStatusBuilder toBuilder() => new SSHStatusBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SSH && running == other.running;
+    return other is SSHStatus && running == other.running;
   }
 
   @override
@@ -81,21 +81,21 @@ class _$SSH extends SSH {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SSH')..add('running', running))
+    return (newBuiltValueToStringHelper('SSHStatus')..add('running', running))
         .toString();
   }
 }
 
-class SSHBuilder implements Builder<SSH, SSHBuilder> {
-  _$SSH _$v;
+class SSHStatusBuilder implements Builder<SSHStatus, SSHStatusBuilder> {
+  _$SSHStatus _$v;
 
   bool _running;
   bool get running => _$this._running;
   set running(bool running) => _$this._running = running;
 
-  SSHBuilder();
+  SSHStatusBuilder();
 
-  SSHBuilder get _$this {
+  SSHStatusBuilder get _$this {
     if (_$v != null) {
       _running = _$v.running;
       _$v = null;
@@ -104,21 +104,21 @@ class SSHBuilder implements Builder<SSH, SSHBuilder> {
   }
 
   @override
-  void replace(SSH other) {
+  void replace(SSHStatus other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$SSH;
+    _$v = other as _$SSHStatus;
   }
 
   @override
-  void update(void updates(SSHBuilder b)) {
+  void update(void updates(SSHStatusBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$SSH build() {
-    final _$result = _$v ?? new _$SSH._(running: running);
+  _$SSHStatus build() {
+    final _$result = _$v ?? new _$SSHStatus._(running: running);
     replace(_$result);
     return _$result;
   }

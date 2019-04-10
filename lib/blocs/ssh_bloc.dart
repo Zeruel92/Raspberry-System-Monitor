@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 
 class SSHBloc {
-  BehaviorSubject<SSH> _subject;
+  BehaviorSubject<SSHStatus> _subject;
   BehaviorSubject<bool> _toggleSubject;
 
   Stream _stream;
@@ -18,7 +18,8 @@ class SSHBloc {
   Sink get sink => _tSink;
 
   SSHBloc(Stream address) {
-    _subject = new BehaviorSubject.seeded(SSH((ssh) => ssh..running = false));
+    _subject =
+        new BehaviorSubject.seeded(SSHStatus((ssh) => ssh..running = false));
     _toggleSubject = new BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
@@ -35,7 +36,7 @@ class SSHBloc {
   void _update(String address) async {
     _addressString = address;
     final res = await http.get('http://$_addressString:8888/ssh/1');
-    _sshSink.add(SSH.fromJson(res.body));
+    _sshSink.add(SSHStatus.fromJson(res.body));
   }
 
   void close() {
