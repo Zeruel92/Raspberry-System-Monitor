@@ -18,7 +18,7 @@
 
 # The location of the flutter-desktop-embedding repository.
 #FDE_ROOT=$(CURDIR)/../..
-FDE_ROOT=/home/gabry/IDE/flutter-desktop-embedding
+FDE_ROOT=${IDE}/flutter-desktop-embedding
 # The C++ code for the embedder application.
 SOURCES=flutter_embedder_example.cc
 # Plugins to include (from the flutter-desktop-embedding plugins/ directory).
