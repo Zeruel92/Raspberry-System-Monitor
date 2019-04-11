@@ -9,7 +9,7 @@ import 'widget.dart';
 void main() {
   Bloc bloc = new Bloc();
   _setTargetPlatformForDesktop();
-  runApp(new MaterialApp(home: new MyApp(bloc: bloc), theme: ThemeData.dark()));
+  runApp(MaterialApp(home: MyApp(bloc: bloc), theme: ThemeData.dark()));
 }
 
 void _setTargetPlatformForDesktop() {
@@ -36,16 +36,16 @@ class MyApp extends StatefulWidget {
 class _State extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Raspberry System Monitor'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Raspberry System Monitor'),
         actions: <Widget>[
           PowerOffButton(sink: widget.bloc.poweroff.sink),
           RebootButton(sink: widget.bloc.reboot.sink)
         ],
       ),
-      body: new Center(
-        child: new Column(
+      body: Center(
+        child: Column(
           children: <Widget>[
             AddressTile(stream: widget.bloc.address),
             LoadAvg(stream: widget.bloc.uptime.stream),
