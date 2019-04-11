@@ -2,6 +2,12 @@
 
 Monitor di sistema che permette l'avvio e lo stop di alcuni servizi che girano sulla raspberry
 
+## Compilare su Desktop
+
+L'app è stata testata usando Flutter 1.2.1 e [Flutter Desktop Embedding][2] su Linux, la versione dell'embedder usata è il commit 92fa610.
+Per compilare portarsi nella root del progetto e usare il comando make -C linux_fde.
+Per usare sistemi operativi differenti fare riferimento alle istruzioni su [Flutter Desktop Embedding][2].
+
 ## Getting Started
 
 Avvia l'app e aspetta che comunichi col sistema.
@@ -14,3 +20,4 @@ NB: sulla raspberrry deve essere installato e avviato il server: [Raspberry Serv
 
 [//]: #Links
 [1]: https://github.com/pspgt/Raspberry-System-Monitor-Server
+[2]: https://github.com/google/flutter-desktop-embedding
