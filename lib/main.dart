@@ -45,7 +45,7 @@ class _State extends State<MyApp> {
         ],
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             AddressTile(stream: widget.bloc.address),
             LoadAvg(stream: widget.bloc.uptime.stream),
@@ -79,4 +79,3 @@ class _State extends State<MyApp> {
 }
 
 //TODO adding support for netatalk
-//TODO make main column scrollable
