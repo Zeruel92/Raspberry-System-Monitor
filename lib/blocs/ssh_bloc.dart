@@ -24,12 +24,12 @@ class SSHBloc {
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
     _sshSink = _subject.sink;
-    _toggleSubject.listen(_sambaToggleListener);
+    _toggleSubject.listen(_sshToggleListener);
     _address = address;
     _address.listen((address) => _update(address.address));
   }
 
-  void _sambaToggleListener(toggle) async {
+  void _sshToggleListener(toggle) async {
     await http.post('http://$_addressString:8888/ssh/$toggle');
   }
 
