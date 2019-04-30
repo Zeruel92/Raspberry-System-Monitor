@@ -78,21 +78,5 @@ class _State extends State<MyApp> {
   }
 }
 
-/* From stack overflow snippet to check if in debug mode
-*
-Here is a simple solution to this:
-
-import 'package:flutter/foundation.dart';
-then you can use kReleaseMode like
-
-if(kReleaseMode){ // is Release Mode ??
-    print('release mode');
-} else {
-    print('debug mode');
-}
-
-*/
-
 //TODO adding support for netatalk
-//TODO use static address in debug for test (maybe is usefull in emulator °L°)
 //TODO make main column scrollable

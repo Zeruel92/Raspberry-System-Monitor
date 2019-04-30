@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/samba_bloc.dart';
@@ -51,6 +52,11 @@ class Bloc {
   }
 
   void _socketListen() {
+    if (!kReleaseMode) {
+      Timer.periodic(Duration(seconds: 10), (_) {
+        _sinkAddress.add(InternetAddress('192.168.1.59'));
+      });
+    }
     RawDatagramSocket.bind(InternetAddress.anyIPv4, 8889).then((socket) {
       socket.listen((e) {
         Datagram dg = socket.receive();
@@ -59,3 +65,18 @@ class Bloc {
     });
   }
 }
+
+/* From stack overflow snippet to check if in debug mode
+*
+Here is a simple solution to this:
+
+import 'package:flutter/foundation.dart';
+then you can use kReleaseMode like
+
+if(kReleaseMode){ // is Release Mode ??
+    print('release mode');
+} else {
+    print('debug mode');
+}
+
+*/
