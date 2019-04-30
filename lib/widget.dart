@@ -324,3 +324,48 @@ class _SSHTileState extends State<SSHTile> {
 
   void _setSSH(bool t) => sink.add(t);
 }
+
+class NetatalkTile extends StatefulWidget {
+  final Stream stream;
+  final Sink sink;
+  NetatalkTile({this.stream, this.sink});
+  @override
+  _NetatalkTileState createState() =>
+      _NetatalkTileState(stream: stream, sink: sink);
+}
+
+class _NetatalkTileState extends State<NetatalkTile> {
+  final Stream stream;
+  final Sink sink;
+  _NetatalkTileState({this.stream, this.sink});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: stream,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.people_outline),
+                  Switch(
+                    value: snap.data.running,
+                    onChanged: _setNetatalk,
+                  ),
+                  snap.data.running ? Text('Netatalk On') : Text('Netatalk Off')
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Card(child: Placeholder());
+        }
+      },
+    );
+  }
+
+  void _setNetatalk(bool t) => sink.add(t);
+}

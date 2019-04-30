@@ -7,6 +7,7 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(NetAtalk.serializer)
       ..add(SSHStatus.serializer)
       ..add(Samba.serializer)
       ..add(Teledart.serializer)

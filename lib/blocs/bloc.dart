@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:raspberry_system_monitor/blocs/apfs_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/samba_bloc.dart';
@@ -19,6 +20,7 @@ class Bloc {
   TorrentBloc torrent;
   SambaBloc samba;
   SSHBloc ssh;
+  NetAtalkBloc apfs;
 
   BehaviorSubject _indirizzoRaspberrySubject;
 
@@ -35,6 +37,7 @@ class Bloc {
     torrent = TorrentBloc(address);
     samba = SambaBloc(address);
     ssh = SSHBloc(address);
+    apfs = NetAtalkBloc(address);
     _sinkAddress = _indirizzoRaspberrySubject.sink;
     _socketListen();
   }
@@ -52,6 +55,7 @@ class Bloc {
   }
 
   void _socketListen() {
+    //Run only if debug [import 'package:flutter/foundation.dart'; for kReleaseMode]
     if (!kReleaseMode) {
       Timer.periodic(Duration(seconds: 10), (_) {
         _sinkAddress.add(InternetAddress('192.168.1.59'));
@@ -65,18 +69,3 @@ class Bloc {
     });
   }
 }
-
-/* From stack overflow snippet to check if in debug mode
-*
-Here is a simple solution to this:
-
-import 'package:flutter/foundation.dart';
-then you can use kReleaseMode like
-
-if(kReleaseMode){ // is Release Mode ??
-    print('release mode');
-} else {
-    print('debug mode');
-}
-
-*/

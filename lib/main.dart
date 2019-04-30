@@ -65,6 +65,10 @@ class _State extends State<MyApp> {
               stream: widget.bloc.ssh.stream,
               sink: widget.bloc.ssh.sink,
             ),
+            NetatalkTile(
+              stream: widget.bloc.apfs.stream,
+              sink: widget.bloc.apfs.sink,
+            )
           ],
         ),
       ),
@@ -77,5 +81,3 @@ class _State extends State<MyApp> {
     super.dispose();
   }
 }
-
-//TODO adding support for netatalk
