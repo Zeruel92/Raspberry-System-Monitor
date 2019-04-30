@@ -95,3 +95,4 @@ if(kReleaseMode){ // is Release Mode ??
 
 //TODO adding support for netatalk
 //TODO use static address in debug for test (maybe is usefull in emulator °L°)
+//TODO make main column scrollable
