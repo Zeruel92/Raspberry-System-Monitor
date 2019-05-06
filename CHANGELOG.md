@@ -1,3 +1,6 @@
+## 1.0.0+12
+Minor fix
+
 ## 1.0.0+11
 Netatalk support
 

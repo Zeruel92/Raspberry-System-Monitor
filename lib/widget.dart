@@ -54,12 +54,12 @@ class _LoadAvgState extends State<LoadAvg> {
                       style: TextStyle(color: load),
                     ),
                     Text(
-                      'Last 5 minutes Load Average ${snap.data.loadAvg5}',
+                      'Last 5 minutes Load Average: ${snap.data.loadAvg5}',
                       style: TextStyle(color: load5),
                     ),
-                    Text('Last 15 minutes Load Average ${snap.data.loadAvg15}',
+                    Text('Last 15 minutes Load Average: ${snap.data.loadAvg15}',
                         style: TextStyle(color: load15)),
-                    Text('System Core temperature ${snap.data.temp} °C',
+                    Text('System Core temperature: ${snap.data.temp} °C',
                         style: TextStyle(color: temp))
                   ],
                 ),
