@@ -26,7 +26,7 @@ SOURCES=flutter_embedder_example.cc
 # Currently this only sets NDEBUG, which is used to control the flags passed
 # to the Flutter engine in the example shell, and not the complation settings
 # (e.g., optimization level) of the C++ code.
-BUILD=debug
+BUILD=release
 
 # Dependency locations
 FLUTTER_APP_DIR=$(CURDIR)/..

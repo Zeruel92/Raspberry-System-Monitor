@@ -1,3 +1,6 @@
+## 1.0.0+13
+Torrent tile more readble
+
 ## 1.0.0+12
 Minor fix
 

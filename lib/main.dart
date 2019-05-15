@@ -45,29 +45,44 @@ class _State extends State<MyApp> {
         ],
       ),
       body: Center(
-        child: ListView(
+        child: Column(
           children: <Widget>[
-            AddressTile(stream: widget.bloc.address),
-            LoadAvg(stream: widget.bloc.uptime.stream),
-            TorrentTile(
-              stream: widget.bloc.torrent.stream,
-              sink: widget.bloc.torrent.sink,
+            Flexible(child: AddressTile(stream: widget.bloc.address), flex: 2),
+            Flexible(
+                child: LoadAvg(stream: widget.bloc.uptime.stream), flex: 4),
+            Flexible(
+              child: TorrentTile(
+                stream: widget.bloc.torrent.stream,
+                sink: widget.bloc.torrent.sink,
+              ),
+              flex: 5,
             ),
-            TeledartTile(
-              stream: widget.bloc.teledart.stream,
-              sink: widget.bloc.teledart.sink,
+            Flexible(
+              child: TeledartTile(
+                stream: widget.bloc.teledart.stream,
+                sink: widget.bloc.teledart.sink,
+              ),
+              flex: 2,
             ),
-            SambaTile(
-              stream: widget.bloc.samba.stream,
-              sink: widget.bloc.samba.sink,
+            Flexible(
+                child: SambaTile(
+                  stream: widget.bloc.samba.stream,
+                  sink: widget.bloc.samba.sink,
+                ),
+                flex: 2),
+            Flexible(
+              child: SSHTile(
+                stream: widget.bloc.ssh.stream,
+                sink: widget.bloc.ssh.sink,
+              ),
+              flex: 2,
             ),
-            SSHTile(
-              stream: widget.bloc.ssh.stream,
-              sink: widget.bloc.ssh.sink,
-            ),
-            NetatalkTile(
-              stream: widget.bloc.apfs.stream,
-              sink: widget.bloc.apfs.sink,
+            Flexible(
+              child: NetatalkTile(
+                stream: widget.bloc.apfs.stream,
+                sink: widget.bloc.apfs.sink,
+              ),
+              flex: 2,
             )
           ],
         ),
