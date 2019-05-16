@@ -55,7 +55,7 @@ class _State extends State<MyApp> {
                 stream: widget.bloc.torrent.stream,
                 sink: widget.bloc.torrent.sink,
               ),
-              flex: 5,
+              flex: 6,
             ),
             Flexible(
               child: TeledartTile(

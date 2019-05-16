@@ -45,23 +45,27 @@ class _LoadAvgState extends State<LoadAvg> {
             return Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text('Uptime: ${snap.data.time}'),
-                    Text(
-                      'Current load Avarege: ${snap.data.loadAvg}',
-                      style: TextStyle(color: load),
-                    ),
-                    Text(
-                      'Last 5 minutes Load Average: ${snap.data.loadAvg5}',
-                      style: TextStyle(color: load5),
-                    ),
-                    Text('Last 15 minutes Load Average: ${snap.data.loadAvg15}',
-                        style: TextStyle(color: load15)),
-                    Text('System Core temperature: ${snap.data.temp} °C',
-                        style: TextStyle(color: temp))
-                  ],
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Uptime: ${snap.data.time}'),
+                      Text(
+                        'Current load Avarege: ${snap.data.loadAvg}',
+                        style: TextStyle(color: load),
+                      ),
+                      Text(
+                        'Last 5 minutes Load Average: ${snap.data.loadAvg5}',
+                        style: TextStyle(color: load5),
+                      ),
+                      Text(
+                          'Last 15 minutes Load Average: ${snap.data.loadAvg15}',
+                          style: TextStyle(color: load15)),
+                      Text('System Core temperature: ${snap.data.temp} °C',
+                          style: TextStyle(color: temp))
+                    ],
+                  ),
                 ),
               ),
             );
@@ -135,7 +139,7 @@ class _TorrentTileState extends State<TorrentTile> {
         if (snap.hasData) {
           return Card(
             child: FittedBox(
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
               child: Row(
                 children: <Widget>[
                   Text(snap.data.torrentStatus),
