@@ -62,27 +62,27 @@ class _State extends State<MyApp> {
                 stream: widget.bloc.teledart.stream,
                 sink: widget.bloc.teledart.sink,
               ),
-              flex: 2,
+              flex: 3,
             ),
             Flexible(
                 child: SambaTile(
                   stream: widget.bloc.samba.stream,
                   sink: widget.bloc.samba.sink,
                 ),
-                flex: 2),
+                flex: 3),
             Flexible(
               child: SSHTile(
                 stream: widget.bloc.ssh.stream,
                 sink: widget.bloc.ssh.sink,
               ),
-              flex: 2,
+              flex: 3,
             ),
             Flexible(
               child: NetatalkTile(
                 stream: widget.bloc.apfs.stream,
                 sink: widget.bloc.apfs.sink,
               ),
-              flex: 2,
+              flex: 3,
             )
           ],
         ),

@@ -96,6 +96,7 @@ class PowerOffButton extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.power_settings_new),
       onPressed: _powerOff,
+      tooltip: 'Turn off Raspberrypi System',
     );
   }
 
@@ -110,9 +111,9 @@ class RebootButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.refresh),
-      onPressed: _reboot,
-    );
+        icon: Icon(Icons.refresh),
+        onPressed: _reboot,
+        tooltip: 'Reboot Raspberrypi System');
   }
 
   void _reboot() => sink.add(true);

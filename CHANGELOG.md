@@ -1,3 +1,6 @@
+## 1.0.0+17
+accessability improvement
+
 ## 1.0.0+15 
 adding 64 bit android apk
 
