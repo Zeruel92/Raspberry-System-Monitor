@@ -15,8 +15,7 @@ Avvia l'app e aspetta che comunichi col sistema.
 NB: sulla raspberrry deve essere installato e avviato il server: [Raspberry Server][1]
 
 ### Status
-32 bit: [![Codemagic build status](https://api.codemagic.io/apps/5c854d9117fd830009ea0236/5c854d9117fd830009ea0235/status_badge.svg)](https://codemagic.io/apps/5c854d9117fd830009ea0236/5c854d9117fd830009ea0235/latest_build)
-64 bit: [![Codemagic build status](https://api.codemagic.io/apps/5c854d9117fd830009ea0236/5ce79f6d1c60c30016c4b76b/status_badge.svg)](https://codemagic.io/apps/5c854d9117fd830009ea0236/5ce79f6d1c60c30016c4b76b/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/5c854d9117fd830009ea0236/5c854d9117fd830009ea0235/status_badge.svg)](https://codemagic.io/apps/5c854d9117fd830009ea0236/5c854d9117fd830009ea0235/latest_build)
 
 [//]: #Links
 [1]: https://github.com/pspgt/Raspberry-System-Monitor-Server

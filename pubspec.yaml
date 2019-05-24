@@ -1,6 +1,6 @@
 name: raspberry_system_monitor
 description: Raspberry System Monitor
-version: 1.0.0+16
+version: 1.0.0+17
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
