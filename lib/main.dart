@@ -1,15 +1,22 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'
     show debugDefaultTargetPlatformOverride;
+import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/blocs/bloc.dart';
+
 import 'widget.dart';
 
 void main() {
   Bloc bloc = new Bloc();
   _setTargetPlatformForDesktop();
-  runApp(MaterialApp(home: MyApp(bloc: bloc), theme: ThemeData.dark()));
+  runApp(
+    MaterialApp(
+      home: MyApp(bloc: bloc),
+      theme: ThemeData.dark(),
+      title: 'Raspberrypi System Monitor',
+    ),
+  );
 }
 
 void _setTargetPlatformForDesktop() {
