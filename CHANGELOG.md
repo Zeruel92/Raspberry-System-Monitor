@@ -1,3 +1,7 @@
+## 1.0.0+18
+new feature Torrent page
+snap build
+
 ## 1.0.0+17
 readme changes
 
