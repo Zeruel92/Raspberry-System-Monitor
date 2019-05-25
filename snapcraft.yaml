@@ -10,9 +10,12 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 
 parts:
   raspberrymonitor:
+    stage-packages:
+    - libgl1
     plugin: dump
-    source: ..build/linux/release/1.zip
+    source: build/linux/release/1.zip
 
 apps:
   raspberrymonitor:
-    command: ./$SNAP/raspberryMonitor
+    command: ./raspberryMonitor
+    plugs: [opengl]
