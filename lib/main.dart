@@ -103,3 +103,6 @@ class _State extends State<MyApp> {
     super.dispose();
   }
 }
+
+
+//TODO: adding torrent page
