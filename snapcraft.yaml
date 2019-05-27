@@ -14,9 +14,9 @@ parts:
     - libgl1
     - libgtk-3-dev
     plugin: dump
-    source: build/linux/release/1.zip
+    source: build/linux/1.zip
 
 apps:
   raspberrymonitor:
-    command: ./raspberryMonitor
-    plugs: [opengl, x11]
+    command: ./release/raspberryMonitor
+    plugs: [opengl, x11, network, network-bind]
