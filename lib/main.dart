@@ -105,3 +105,4 @@ class _State extends State<MyApp> {
 }
 
 //TODO: adding torrent page
+//TODO: adding disk space infos
