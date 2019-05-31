@@ -1,6 +1,6 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/uptime.dart';
+import 'package:rxdart/rxdart.dart';
 
 class UptimeBloc {
   BehaviorSubject<Uptime> _uptimeSubject;
@@ -16,7 +16,9 @@ class UptimeBloc {
     _sinkUptime = _uptimeSubject.sink;
     _uptimeStream = _uptimeSubject.stream;
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _update(String address) async {

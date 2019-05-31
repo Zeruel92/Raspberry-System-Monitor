@@ -1,5 +1,5 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
+import 'package:rxdart/rxdart.dart';
 
 class RebootBloc {
   BehaviorSubject _rebootSubject;
@@ -14,7 +14,9 @@ class RebootBloc {
     _rebootSink = _rebootSubject.sink;
     _rebootSubject.listen(_rebootListener);
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _update(String address) {

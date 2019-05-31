@@ -1,5 +1,5 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
+import 'package:rxdart/rxdart.dart';
 
 class PoweroffBloc {
   BehaviorSubject _powerOffSubject;
@@ -14,7 +14,9 @@ class PoweroffBloc {
     _powerOffSink = _powerOffSubject.sink;
     _powerOffSubject.listen(_powerOffListener);
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _powerOffListener(onValue) async {

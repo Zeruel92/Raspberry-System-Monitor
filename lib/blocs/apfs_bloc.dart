@@ -1,6 +1,6 @@
+import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/apfs.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 
 class NetAtalkBloc {
   BehaviorSubject<NetAtalk> _subject;
@@ -26,7 +26,9 @@ class NetAtalkBloc {
     _apfsSink = _subject.sink;
     _toggleSubject.listen(_afpToggleListener);
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _afpToggleListener(toggle) async {

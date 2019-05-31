@@ -1,6 +1,6 @@
+import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/samba.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 
 class SambaBloc {
   BehaviorSubject<Samba> _subject;
@@ -26,7 +26,9 @@ class SambaBloc {
     _sambaSink = _subject.sink;
     _toggleSubject.listen(_sambaToggleListener);
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _sambaToggleListener(toggle) async {

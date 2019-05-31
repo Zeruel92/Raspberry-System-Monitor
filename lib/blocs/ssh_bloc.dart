@@ -1,6 +1,6 @@
+import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/ssh.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 
 class SSHBloc {
   BehaviorSubject<SSHStatus> _subject;
@@ -26,7 +26,9 @@ class SSHBloc {
     _sshSink = _subject.sink;
     _toggleSubject.listen(_sshToggleListener);
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _sshToggleListener(toggle) async {

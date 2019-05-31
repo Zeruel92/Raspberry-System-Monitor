@@ -1,6 +1,6 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/teledart.dart';
+import 'package:rxdart/rxdart.dart';
 
 class TeledartBloc {
   BehaviorSubject<Teledart> _teledartSubject;
@@ -26,7 +26,9 @@ class TeledartBloc {
     _teledartSink = _teledartSubject.sink;
     _teledartToggleSubject.listen(_teledartToggleListener);
     _address = address;
-    _address.listen((address) => _update(address.address));
+    _address.listen((address) {
+      if (address != null) _update(address.address);
+    });
   }
 
   void _teledartToggleListener(toggle) async {
