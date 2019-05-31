@@ -47,10 +47,10 @@ class _State extends State<MyApp> {
         child: Column(
           children: <Widget>[
             Flexible(child: AddressTile(), flex: 2),
-            Flexible(child: LoadAvg(), flex: 4),
+            Flexible(child: LoadAvg(), flex: 5),
             Flexible(
               child: TorrentTile(),
-              flex: 6,
+              flex: 7,
             ),
             Flexible(
               child: TeledartTile(),
