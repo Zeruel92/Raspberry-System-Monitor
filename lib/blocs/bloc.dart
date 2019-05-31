@@ -13,6 +13,9 @@ import 'package:raspberry_system_monitor/blocs/uptime_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Bloc {
+  static final Bloc _instance = Bloc._private();
+  static Bloc get instance => _instance;
+
   UptimeBloc uptime;
   RebootBloc reboot;
   PoweroffBloc poweroff;
@@ -28,7 +31,7 @@ class Bloc {
 
   Stream get address => _indirizzoRaspberrySubject.stream;
 
-  Bloc() {
+  Bloc._private() {
     _indirizzoRaspberrySubject = new BehaviorSubject();
     uptime = UptimeBloc(address);
     reboot = RebootBloc(address);

@@ -8,11 +8,10 @@ import 'package:raspberry_system_monitor/blocs/bloc.dart';
 import 'widget.dart';
 
 void main() {
-  Bloc bloc = new Bloc();
   _setTargetPlatformForDesktop();
   runApp(
     MaterialApp(
-      home: MyApp(bloc: bloc),
+      home: MyApp(),
       theme: ThemeData.dark(),
       title: 'Raspberrypi System Monitor',
     ),
@@ -32,10 +31,6 @@ void _setTargetPlatformForDesktop() {
 }
 
 class MyApp extends StatefulWidget {
-  final Bloc bloc;
-
-  MyApp({this.bloc});
-
   @override
   _State createState() => new _State();
 }
@@ -47,47 +42,48 @@ class _State extends State<MyApp> {
       appBar: AppBar(
         title: Text('Raspberry System Monitor'),
         actions: <Widget>[
-          PowerOffButton(sink: widget.bloc.poweroff.sink),
-          RebootButton(sink: widget.bloc.reboot.sink)
+          PowerOffButton(sink: Bloc.instance.poweroff.sink),
+          RebootButton(sink: Bloc.instance.reboot.sink)
         ],
       ),
       body: Center(
         child: Column(
           children: <Widget>[
-            Flexible(child: AddressTile(stream: widget.bloc.address), flex: 2),
             Flexible(
-                child: LoadAvg(stream: widget.bloc.uptime.stream), flex: 4),
+                child: AddressTile(stream: Bloc.instance.address), flex: 2),
+            Flexible(
+                child: LoadAvg(stream: Bloc.instance.uptime.stream), flex: 4),
             Flexible(
               child: TorrentTile(
-                stream: widget.bloc.torrent.stream,
-                sink: widget.bloc.torrent.sink,
+                stream: Bloc.instance.torrent.stream,
+                sink: Bloc.instance.torrent.sink,
               ),
               flex: 6,
             ),
             Flexible(
               child: TeledartTile(
-                stream: widget.bloc.teledart.stream,
-                sink: widget.bloc.teledart.sink,
+                stream: Bloc.instance.teledart.stream,
+                sink: Bloc.instance.teledart.sink,
               ),
               flex: 3,
             ),
             Flexible(
                 child: SambaTile(
-                  stream: widget.bloc.samba.stream,
-                  sink: widget.bloc.samba.sink,
+                  stream: Bloc.instance.samba.stream,
+                  sink: Bloc.instance.samba.sink,
                 ),
                 flex: 3),
             Flexible(
               child: SSHTile(
-                stream: widget.bloc.ssh.stream,
-                sink: widget.bloc.ssh.sink,
+                stream: Bloc.instance.ssh.stream,
+                sink: Bloc.instance.ssh.sink,
               ),
               flex: 3,
             ),
             Flexible(
               child: NetatalkTile(
-                stream: widget.bloc.apfs.stream,
-                sink: widget.bloc.apfs.sink,
+                stream: Bloc.instance.apfs.stream,
+                sink: Bloc.instance.apfs.sink,
               ),
               flex: 3,
             )
@@ -99,7 +95,7 @@ class _State extends State<MyApp> {
 
   @override
   void dispose() {
-    widget.bloc.close();
+    Bloc.instance.close();
     super.dispose();
   }
 }
