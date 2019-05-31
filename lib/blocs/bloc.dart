@@ -72,5 +72,3 @@ class Bloc {
     });
   }
 }
-
-//TODO: make singleton

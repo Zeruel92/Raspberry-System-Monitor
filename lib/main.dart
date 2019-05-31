@@ -41,50 +41,28 @@ class _State extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Raspberry System Monitor'),
-        actions: <Widget>[
-          PowerOffButton(sink: Bloc.instance.poweroff.sink),
-          RebootButton(sink: Bloc.instance.reboot.sink)
-        ],
+        actions: <Widget>[PowerOffButton(), RebootButton()],
       ),
       body: Center(
         child: Column(
           children: <Widget>[
+            Flexible(child: AddressTile(), flex: 2),
+            Flexible(child: LoadAvg(), flex: 4),
             Flexible(
-                child: AddressTile(stream: Bloc.instance.address), flex: 2),
-            Flexible(
-                child: LoadAvg(stream: Bloc.instance.uptime.stream), flex: 4),
-            Flexible(
-              child: TorrentTile(
-                stream: Bloc.instance.torrent.stream,
-                sink: Bloc.instance.torrent.sink,
-              ),
+              child: TorrentTile(),
               flex: 6,
             ),
             Flexible(
-              child: TeledartTile(
-                stream: Bloc.instance.teledart.stream,
-                sink: Bloc.instance.teledart.sink,
-              ),
+              child: TeledartTile(),
+              flex: 3,
+            ),
+            Flexible(child: SambaTile(), flex: 3),
+            Flexible(
+              child: SSHTile(),
               flex: 3,
             ),
             Flexible(
-                child: SambaTile(
-                  stream: Bloc.instance.samba.stream,
-                  sink: Bloc.instance.samba.sink,
-                ),
-                flex: 3),
-            Flexible(
-              child: SSHTile(
-                stream: Bloc.instance.ssh.stream,
-                sink: Bloc.instance.ssh.sink,
-              ),
-              flex: 3,
-            ),
-            Flexible(
-              child: NetatalkTile(
-                stream: Bloc.instance.apfs.stream,
-                sink: Bloc.instance.apfs.sink,
-              ),
+              child: NetatalkTile(),
               flex: 3,
             )
           ],

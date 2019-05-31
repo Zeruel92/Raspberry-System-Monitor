@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:raspberry_system_monitor/blocs/bloc.dart';
 
 class LoadAvg extends StatefulWidget {
-  final Stream stream;
-  LoadAvg({this.stream});
   @override
-  _LoadAvgState createState() => _LoadAvgState(stream: stream);
+  _LoadAvgState createState() => _LoadAvgState();
 }
 
 class _LoadAvgState extends State<LoadAvg> {
-  final Stream stream;
-  _LoadAvgState({this.stream});
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: StreamBuilder(
-        stream: stream,
+        stream: Bloc.instance.uptime.stream,
         builder: (context, AsyncSnapshot snap) {
           if (snap.hasData) {
             Color load = Colors.green;
@@ -87,10 +83,6 @@ class _LoadAvgState extends State<LoadAvg> {
 }
 
 class PowerOffButton extends StatelessWidget {
-  final Sink sink;
-
-  PowerOffButton({this.sink});
-
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -100,14 +92,10 @@ class PowerOffButton extends StatelessWidget {
     );
   }
 
-  void _powerOff() => sink.add(true);
+  void _powerOff() => Bloc.instance.poweroff.sink.add(true);
 }
 
 class RebootButton extends StatelessWidget {
-  final Sink sink;
-
-  RebootButton({this.sink});
-
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -116,26 +104,19 @@ class RebootButton extends StatelessWidget {
         tooltip: 'Reboot Raspberrypi System');
   }
 
-  void _reboot() => sink.add(true);
+  void _reboot() => Bloc.instance.reboot.sink.add(true);
 }
 
 class TorrentTile extends StatefulWidget {
-  final Stream stream;
-  final Sink sink;
-  TorrentTile({this.stream, this.sink});
   @override
-  _TorrentTileState createState() =>
-      _TorrentTileState(stream: stream, sink: sink);
+  _TorrentTileState createState() => _TorrentTileState();
 }
 
 class _TorrentTileState extends State<TorrentTile> {
-  final Stream stream;
-  final Sink sink;
-  _TorrentTileState({this.stream, this.sink});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: stream,
+      stream: Bloc.instance.torrent.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -160,26 +141,19 @@ class _TorrentTileState extends State<TorrentTile> {
     );
   }
 
-  void _setTorrent(bool t) => sink.add(t);
+  void _setTorrent(bool t) => Bloc.instance.torrent.sink.add(t);
 }
 
 class TeledartTile extends StatefulWidget {
-  final Stream stream;
-  final Sink sink;
-  TeledartTile({this.stream, this.sink});
   @override
-  _TeledartTileState createState() =>
-      _TeledartTileState(stream: stream, sink: sink);
+  _TeledartTileState createState() => _TeledartTileState();
 }
 
 class _TeledartTileState extends State<TeledartTile> {
-  final Stream stream;
-  final Sink sink;
-  _TeledartTileState({this.stream, this.sink});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: stream,
+      stream: Bloc.instance.teledart.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -204,23 +178,19 @@ class _TeledartTileState extends State<TeledartTile> {
     );
   }
 
-  void _setTeledart(bool t) => sink.add(t);
+  void _setTeledart(bool t) => Bloc.instance.teledart.sink.add(t);
 }
 
 class AddressTile extends StatefulWidget {
-  final Stream stream;
-  AddressTile({this.stream});
   @override
-  _AddressTileState createState() => _AddressTileState(stream: stream);
+  _AddressTileState createState() => _AddressTileState();
 }
 
 class _AddressTileState extends State<AddressTile> {
-  final Stream stream;
-  _AddressTileState({this.stream});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: stream,
+      stream: Bloc.instance.address,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -240,25 +210,15 @@ class _AddressTileState extends State<AddressTile> {
 }
 
 class SambaTile extends StatefulWidget {
-  final Stream stream;
-  final Sink sink;
-
-  SambaTile({this.stream, this.sink});
-
   @override
-  _SambaTileState createState() => _SambaTileState(stream: stream, sink: sink);
+  _SambaTileState createState() => _SambaTileState();
 }
 
 class _SambaTileState extends State<SambaTile> {
-  final Stream stream;
-  final Sink sink;
-
-  _SambaTileState({this.stream, this.sink});
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: stream,
+      stream: Bloc.instance.samba.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -283,26 +243,19 @@ class _SambaTileState extends State<SambaTile> {
     );
   }
 
-  void _setSamba(bool t) => sink.add(t);
+  void _setSamba(bool t) => Bloc.instance.samba.sink.add(t);
 }
 
 class SSHTile extends StatefulWidget {
-  final Stream stream;
-  final Sink sink;
-  SSHTile({this.stream, this.sink});
   @override
-  _SSHTileState createState() => _SSHTileState(stream: stream, sink: sink);
+  _SSHTileState createState() => _SSHTileState();
 }
 
 class _SSHTileState extends State<SSHTile> {
-  final Stream stream;
-  final Sink sink;
-  _SSHTileState({this.stream, this.sink});
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: stream,
+      stream: Bloc.instance.ssh.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -327,27 +280,19 @@ class _SSHTileState extends State<SSHTile> {
     );
   }
 
-  void _setSSH(bool t) => sink.add(t);
+  void _setSSH(bool t) => Bloc.instance.ssh.sink.add(t);
 }
 
 class NetatalkTile extends StatefulWidget {
-  final Stream stream;
-  final Sink sink;
-  NetatalkTile({this.stream, this.sink});
   @override
-  _NetatalkTileState createState() =>
-      _NetatalkTileState(stream: stream, sink: sink);
+  _NetatalkTileState createState() => _NetatalkTileState();
 }
 
 class _NetatalkTileState extends State<NetatalkTile> {
-  final Stream stream;
-  final Sink sink;
-  _NetatalkTileState({this.stream, this.sink});
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: stream,
+      stream: Bloc.instance.apfs.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
           return Card(
@@ -372,5 +317,5 @@ class _NetatalkTileState extends State<NetatalkTile> {
     );
   }
 
-  void _setNetatalk(bool t) => sink.add(t);
+  void _setNetatalk(bool t) => Bloc.instance.apfs.sink.add(t);
 }
