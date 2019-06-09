@@ -20,8 +20,10 @@ class PoweroffBloc {
   }
 
   void _powerOffListener(onValue) async {
-    dynamic res = await http.get('http://$_addressString:8888/poweroff');
-    print(res.body);
+    try {
+      final res = await http.get('http://$_addressString:8888/poweroff');
+      print(res.body);
+    }catch(e){}
   }
 
   void _update(String address) {

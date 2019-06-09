@@ -32,13 +32,19 @@ class SSHBloc {
   }
 
   void _sshToggleListener(toggle) async {
-    await http.post('http://$_addressString:8888/ssh/$toggle');
+    try {
+      await http.post('http://$_addressString:8888/ssh/$toggle');
+    }catch (e){
+    }
   }
 
   void _update(String address) async {
     _addressString = address;
-    final res = await http.get('http://$_addressString:8888/ssh/1');
-    _sshSink.add(SSHStatus.fromJson(res.body));
+    try{
+      final res = await http.get('http://$_addressString:8888/ssh/1');
+      _sshSink.add(SSHStatus.fromJson(res.body));
+    }catch (e){
+    }
   }
 
   void close() {

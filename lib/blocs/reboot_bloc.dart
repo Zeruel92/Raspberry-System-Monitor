@@ -24,8 +24,10 @@ class RebootBloc {
   }
 
   void _rebootListener(onValue) async {
-    dynamic res = await http.get('http://$_addressString:8888/reboot');
-    print(res.body);
+    try{
+      final res = await http.get('http://$_addressString:8888/reboot');
+      print(res.body);
+    }catch(e){}
   }
 
   void close() {

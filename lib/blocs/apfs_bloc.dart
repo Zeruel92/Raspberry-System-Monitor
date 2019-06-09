@@ -37,8 +37,11 @@ class NetAtalkBloc {
 
   void _update(String address) async {
     _addressString = address;
-    final res = await http.get('http://$_addressString:8888/netatalk/1');
-    _apfsSink.add(NetAtalk.fromJson(res.body));
+    try {
+      final res = await http.get('http://$_addressString:8888/netatalk/1');
+      _apfsSink.add(NetAtalk.fromJson(res.body));
+    }catch(e){
+    }
   }
 
   void close() {

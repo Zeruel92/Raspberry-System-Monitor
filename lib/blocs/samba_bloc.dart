@@ -32,13 +32,17 @@ class SambaBloc {
   }
 
   void _sambaToggleListener(toggle) async {
-    await http.post('http://$_addressString:8888/smb/$toggle');
+    try{
+      await http.post('http://$_addressString:8888/smb/$toggle');
+    }catch(e){}
   }
 
   void _update(String address) async {
     _addressString = address;
-    final res = await http.get('http://$_addressString:8888/smb/1');
-    _sambaSink.add(Samba.fromJson(res.body));
+    try {
+      final res = await http.get('http://$_addressString:8888/smb/1');
+      _sambaSink.add(Samba.fromJson(res.body));
+    }catch(e){}
   }
 
   void close() {

@@ -32,13 +32,19 @@ class TeledartBloc {
   }
 
   void _teledartToggleListener(toggle) async {
-    await http.post('http://$_addressString:8888/teledart/$toggle');
+    try {
+      await http.post('http://$_addressString:8888/teledart/$toggle');
+    }finally{
+    }
   }
 
   void _update(String address) async {
     _addressString = address;
-    final res = await http.get('http://$_addressString:8888/teledart/1');
-    _teledartSink.add(Teledart.fromJson(res.body));
+    try {
+      final res = await http.get('http://$_addressString:8888/teledart/1');
+      _teledartSink.add(Teledart.fromJson(res.body));
+    }catch (e){
+    }
   }
 
   void close() {

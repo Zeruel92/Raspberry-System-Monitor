@@ -22,12 +22,10 @@ class UptimeBloc {
   }
 
   void _update(String address) async {
-    dynamic res;
     try{
-      res = await http.get('http://$address:8888/uptime');
-    }finally{
+      final res = await http.get('http://$address:8888/uptime');
       _sinkUptime.add(Uptime.fromJson(res.body));
-    }
+    }catch (e){}
   }
 
   void close() {

@@ -34,24 +34,18 @@ class TorrentBloc {
 
   void _update(String address) async {
     _addressString = address;
-    dynamic res;
     try {
-      res = await http.get('http://$_addressString:8888/torrentstatus/1');
+      final res = await http.get('http://$_addressString:8888/torrentstatus/1');
+      _torrentSink.add(TorrentStats.fromJson(res.body));
     }catch(e){
-
-    }finally{
-    _torrentSink.add(TorrentStats.fromJson(res.body));
     }
-
   }
 
   void _torrentToggleListener(toggle) async {
     try{
       await http.post('http://$_addressString:8888/torrentstatus/$toggle');
     }catch(e){
-
     }
-
   }
 
   void close() {
