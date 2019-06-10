@@ -47,7 +47,7 @@ class _State extends State<MyApp> {
         child: Column(
           children: <Widget>[
             Flexible(child: AddressTile(), flex: 2),
-            Flexible(child: LoadAvg(), flex: 6),
+            Flexible(child: LoadAvg(), flex: 7),
             Flexible(child: DiskTile(), flex: 6,),
             Flexible(
               child: TorrentTile(),
@@ -55,11 +55,11 @@ class _State extends State<MyApp> {
             ),
             Flexible(
               child: TeledartTile(),
-              flex: 3,
+              flex: 4,
             ),
-            Flexible(child: SambaTile(), flex: 3),
-            Flexible(child: SSHTile(), flex: 3),
-            Flexible(child: NetatalkTile(), flex: 3)
+            Flexible(child: SambaTile(), flex: 4),
+            Flexible(child: SSHTile(), flex: 4),
+            Flexible(child: NetatalkTile(), flex: 4)
           ],
         ),
       ),
