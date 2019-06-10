@@ -46,25 +46,25 @@ class _State extends State<MyApp> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Flexible(child: AddressTile(), flex: 2),
-            Flexible(child: LoadAvg(), flex: 5),
-            Flexible(child: Placeholder(), flex: 2,),
+            Flexible(child: AddressTile(), flex: 3),
+            Flexible(child: LoadAvg(), flex: 6),
+            Flexible(child: DiskTile(), flex: 5,),
             Flexible(
               child: TorrentTile(),
-              flex: 7,
+              flex: 9,
             ),
             Flexible(
               child: TeledartTile(),
-              flex: 3,
+              flex: 4,
             ),
-            Flexible(child: SambaTile(), flex: 3),
+            Flexible(child: SambaTile(), flex: 4),
             Flexible(
               child: SSHTile(),
-              flex: 3,
+              flex: 4,
             ),
             Flexible(
               child: NetatalkTile(),
-              flex: 3,
+              flex: 4,
             )
           ],
         ),

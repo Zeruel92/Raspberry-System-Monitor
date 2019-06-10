@@ -319,3 +319,32 @@ class _NetatalkTileState extends State<NetatalkTile> {
 
   void _setNetatalk(bool t) => Bloc.instance.apfs.sink.add(t);
 }
+
+class DiskTile extends StatefulWidget {
+  @override
+  _DiskTileState createState() => _DiskTileState();
+}
+
+class _DiskTileState extends State<DiskTile> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Bloc.instance.disk.stream,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return Card(
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Row(
+                children: <Widget>[Text('${snap.data.df}')],
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+}
+

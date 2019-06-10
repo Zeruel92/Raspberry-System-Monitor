@@ -22,7 +22,7 @@ class DiskBloc {
 
   void _update(String address) async {
     try{
-      final res = await http.get('http://$address:8888/uptime');
+      final res = await http.get('http://$address:8888/disks');
       _sinkDisk.add(DiskModel.fromJson(res.body));
     }catch (e){}
   }
