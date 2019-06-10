@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:raspberry_system_monitor/blocs/apfs_bloc.dart';
+import 'package:raspberry_system_monitor/blocs/disk_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/samba_bloc.dart';
@@ -24,6 +25,7 @@ class Bloc {
   SambaBloc samba;
   SSHBloc ssh;
   NetAtalkBloc apfs;
+  DiskBloc disk;
 
   BehaviorSubject _indirizzoRaspberrySubject;
 
@@ -41,6 +43,7 @@ class Bloc {
     samba = SambaBloc(address);
     ssh = SSHBloc(address);
     apfs = NetAtalkBloc(address);
+    disk = DiskBloc(address);
     _sinkAddress = _indirizzoRaspberrySubject.sink;
     _socketListen();
   }
@@ -53,6 +56,7 @@ class Bloc {
     torrent.close();
     samba.close();
     ssh.close();
+    disk.close();
     _indirizzoRaspberrySubject.close();
     _sinkAddress.close();
   }

@@ -30,5 +30,6 @@ class UptimeBloc {
 
   void close() {
     _uptimeSubject.close();
+    _sinkUptime.close();
   }
 }
