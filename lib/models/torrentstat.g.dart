@@ -62,7 +62,7 @@ class _$TorrentStats extends TorrentStats {
   @override
   final bool running;
 
-  factory _$TorrentStats([void updates(TorrentStatsBuilder b)]) =>
+  factory _$TorrentStats([void Function(TorrentStatsBuilder) updates]) =>
       (new TorrentStatsBuilder()..update(updates)).build();
 
   _$TorrentStats._({this.torrentStatus, this.running}) : super._() {
@@ -75,7 +75,7 @@ class _$TorrentStats extends TorrentStats {
   }
 
   @override
-  TorrentStats rebuild(void updates(TorrentStatsBuilder b)) =>
+  TorrentStats rebuild(void Function(TorrentStatsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -136,7 +136,7 @@ class TorrentStatsBuilder
   }
 
   @override
-  void update(void updates(TorrentStatsBuilder b)) {
+  void update(void Function(TorrentStatsBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -48,6 +48,7 @@ class _State extends State<MyApp> {
           children: <Widget>[
             Flexible(child: AddressTile(), flex: 2),
             Flexible(child: LoadAvg(), flex: 5),
+            Flexible(child: Placeholder(), flex: 2,),
             Flexible(
               child: TorrentTile(),
               flex: 7,

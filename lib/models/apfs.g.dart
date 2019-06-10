@@ -52,7 +52,7 @@ class _$NetAtalk extends NetAtalk {
   @override
   final bool running;
 
-  factory _$NetAtalk([void updates(NetAtalkBuilder b)]) =>
+  factory _$NetAtalk([void Function(NetAtalkBuilder) updates]) =>
       (new NetAtalkBuilder()..update(updates)).build();
 
   _$NetAtalk._({this.running}) : super._() {
@@ -62,7 +62,7 @@ class _$NetAtalk extends NetAtalk {
   }
 
   @override
-  NetAtalk rebuild(void updates(NetAtalkBuilder b)) =>
+  NetAtalk rebuild(void Function(NetAtalkBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -112,7 +112,7 @@ class NetAtalkBuilder implements Builder<NetAtalk, NetAtalkBuilder> {
   }
 
   @override
-  void update(void updates(NetAtalkBuilder b)) {
+  void update(void Function(NetAtalkBuilder) updates) {
     if (updates != null) updates(this);
   }
 

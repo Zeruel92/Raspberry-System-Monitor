@@ -52,7 +52,7 @@ class _$SSHStatus extends SSHStatus {
   @override
   final bool running;
 
-  factory _$SSHStatus([void updates(SSHStatusBuilder b)]) =>
+  factory _$SSHStatus([void Function(SSHStatusBuilder) updates]) =>
       (new SSHStatusBuilder()..update(updates)).build();
 
   _$SSHStatus._({this.running}) : super._() {
@@ -62,7 +62,7 @@ class _$SSHStatus extends SSHStatus {
   }
 
   @override
-  SSHStatus rebuild(void updates(SSHStatusBuilder b)) =>
+  SSHStatus rebuild(void Function(SSHStatusBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -112,7 +112,7 @@ class SSHStatusBuilder implements Builder<SSHStatus, SSHStatusBuilder> {
   }
 
   @override
-  void update(void updates(SSHStatusBuilder b)) {
+  void update(void Function(SSHStatusBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -52,7 +52,7 @@ class _$Samba extends Samba {
   @override
   final bool running;
 
-  factory _$Samba([void updates(SambaBuilder b)]) =>
+  factory _$Samba([void Function(SambaBuilder) updates]) =>
       (new SambaBuilder()..update(updates)).build();
 
   _$Samba._({this.running}) : super._() {
@@ -62,7 +62,7 @@ class _$Samba extends Samba {
   }
 
   @override
-  Samba rebuild(void updates(SambaBuilder b)) =>
+  Samba rebuild(void Function(SambaBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -112,7 +112,7 @@ class SambaBuilder implements Builder<Samba, SambaBuilder> {
   }
 
   @override
-  void update(void updates(SambaBuilder b)) {
+  void update(void Function(SambaBuilder) updates) {
     if (updates != null) updates(this);
   }
 

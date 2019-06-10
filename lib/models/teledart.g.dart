@@ -52,7 +52,7 @@ class _$Teledart extends Teledart {
   @override
   final bool running;
 
-  factory _$Teledart([void updates(TeledartBuilder b)]) =>
+  factory _$Teledart([void Function(TeledartBuilder) updates]) =>
       (new TeledartBuilder()..update(updates)).build();
 
   _$Teledart._({this.running}) : super._() {
@@ -62,7 +62,7 @@ class _$Teledart extends Teledart {
   }
 
   @override
-  Teledart rebuild(void updates(TeledartBuilder b)) =>
+  Teledart rebuild(void Function(TeledartBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -112,7 +112,7 @@ class TeledartBuilder implements Builder<Teledart, TeledartBuilder> {
   }
 
   @override
-  void update(void updates(TeledartBuilder b)) {
+  void update(void Function(TeledartBuilder) updates) {
     if (updates != null) updates(this);
   }
 

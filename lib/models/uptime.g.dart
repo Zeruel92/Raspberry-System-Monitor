@@ -86,7 +86,7 @@ class _$Uptime extends Uptime {
   @override
   final double temp;
 
-  factory _$Uptime([void updates(UptimeBuilder b)]) =>
+  factory _$Uptime([void Function(UptimeBuilder) updates]) =>
       (new UptimeBuilder()..update(updates)).build();
 
   _$Uptime._(
@@ -110,7 +110,7 @@ class _$Uptime extends Uptime {
   }
 
   @override
-  Uptime rebuild(void updates(UptimeBuilder b)) =>
+  Uptime rebuild(void Function(UptimeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -195,7 +195,7 @@ class UptimeBuilder implements Builder<Uptime, UptimeBuilder> {
   }
 
   @override
-  void update(void updates(UptimeBuilder b)) {
+  void update(void Function(UptimeBuilder) updates) {
     if (updates != null) updates(this);
   }
 
