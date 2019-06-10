@@ -1,3 +1,6 @@
+## 1.0.0+21
+show disks information
+
 ## 1.0.0+20
 minor fix 
 
