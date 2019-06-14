@@ -1,3 +1,6 @@
+## 1.0.0+24
+minor fix
+
 ## 1.0.0+23
 minor fix
 
