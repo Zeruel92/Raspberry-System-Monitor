@@ -28,6 +28,11 @@ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}else{
+    keystoreProperties['keyAlias']=findProperty('keyAlias')
+    keystoreProperties['keyPassword']=findProperty('keyPassword')
+    keystoreProperties['storeFile']=findProperty('storeFile')
+    keystoreProperties['storePassword']=findProperty('storePassword')
 }
 
 android {
