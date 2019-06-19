@@ -4,18 +4,13 @@ import 'package:flutter/foundation.dart'
     show debugDefaultTargetPlatformOverride;
 import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/blocs/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widget.dart';
 
 void main() {
   _setTargetPlatformForDesktop();
-  runApp(
-    MaterialApp(
-      home: MyApp(),
-      theme: ThemeData.dark(),
-      title: 'Raspberrypi System Monitor',
-    ),
-  );
+  runApp(MyApp());
 }
 
 void _setTargetPlatformForDesktop() {
@@ -36,25 +31,55 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
+  bool _dark;
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid)
+      _loadPrefs();
+    else
+      _dark = false;
+  }
+
+  void _loadPrefs() async {
+    if (Platform.isAndroid) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        _dark = prefs.getBool('dark') ?? false;
+      });
+    }
+  }
+
+  void _onDarkChanged(bool changed) async {
+    setState(() => _dark = changed);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('dark', _dark);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Raspberry System Monitor'),
-        actions: <Widget>[PowerOffButton(), RebootButton()],
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Flexible(child: AddressTile(), flex: 1),
-            Flexible(child: LoadAvg(), flex: 4),
-            Flexible(child: DiskTile(), flex: 4,),
-            Flexible(child: TorrentTile(), flex: 4),
-            Flexible(child: TeledartTile(), flex: 2),
-            Flexible(child: SambaTile(), flex: 2),
-            Flexible(child: SSHTile(), flex: 2),
-            Flexible(child: NetatalkTile(), flex: 2)
-          ],
+    return MaterialApp(
+      title: 'Raspberry System Monitor',
+      theme: _dark ? ThemeData.dark() : ThemeData.light(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Raspberry System Monitor'),
+          actions: <Widget>[PowerOffButton(), RebootButton()],
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Flexible(child: AddressTile(), flex: 1),
+              Flexible(child: LoadAvg(), flex: 4),
+              Flexible(child: DiskTile(), flex: 4,),
+              Flexible(child: TorrentTile(), flex: 4),
+              Flexible(child: TeledartTile(), flex: 2),
+              Flexible(child: SambaTile(), flex: 2),
+              Flexible(child: SSHTile(), flex: 2),
+              Flexible(child: NetatalkTile(), flex: 2)
+            ],
+          ),
         ),
       ),
     );
@@ -67,3 +92,4 @@ class _State extends State<MyApp> {
   }
 }
 
+//TODO: persistance on linux

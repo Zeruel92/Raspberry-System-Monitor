@@ -1,3 +1,6 @@
+## 1.0.0+25
+theme selector
+
 ## 1.0.0+24
 minor fix
 
