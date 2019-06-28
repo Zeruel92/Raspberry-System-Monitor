@@ -36,25 +36,29 @@ class _State extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid)
-      _loadPrefs();
-    else
-      _dark = false;
+    _dark = false;
+    _loadPrefs();
   }
 
   void _loadPrefs() async {
-    if (Platform.isAndroid) {
+    if ((Platform.isAndroid) || (Platform.isIOS)) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       setState(() {
         _dark = prefs.getBool('dark') ?? false;
       });
+    } else {
+      //TODO: persistance on linux
     }
   }
 
   void _onDarkChanged(bool changed) async {
     setState(() => _dark = changed);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('dark', _dark);
+    if ((Platform.isAndroid) || (Platform.isIOS)) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('dark', _dark);
+    } else {
+      //TODO: persistance on linux
+    }
   }
 
   @override
@@ -73,11 +77,25 @@ class _State extends State<MyApp> {
               Flexible(child: AddressTile(), flex: 1),
               Flexible(child: LoadAvg(), flex: 4),
               Flexible(child: DiskTile(), flex: 4,),
-              Flexible(child: TorrentTile(), flex: 4),
+              Flexible(child: TorrentTile(), flex: 7),
               Flexible(child: TeledartTile(), flex: 2),
               Flexible(child: SambaTile(), flex: 2),
               Flexible(child: SSHTile(), flex: 2),
               Flexible(child: NetatalkTile(), flex: 2)
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: Column(
+            children: <Widget>[
+              DrawerHeader(
+                child: Center(child: Text("Impostazioni")),
+              ),
+              SwitchListTile(
+                value: _dark,
+                onChanged: _onDarkChanged,
+                title: Text('Darkmode'),
+              )
             ],
           ),
         ),
@@ -91,5 +109,3 @@ class _State extends State<MyApp> {
     super.dispose();
   }
 }
-
-//TODO: persistance on linux
