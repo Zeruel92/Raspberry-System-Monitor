@@ -48,9 +48,17 @@ class _State extends State<MyApp> {
         _dark = prefs.getBool('dark') ?? false;
       });
     } else {
-      File configFile = File('config.bin');
-      Map config = json.decode(configFile.readAsStringSync());
-      _dark = config['dark'] ?? false;
+      File configFile = File('~/.config/rasp_mon/config.json');
+      if (configFile.existsSync()) {
+        Map config = json.decode(configFile.readAsStringSync());
+        setState(() {
+          _dark = config['dark'] ?? false;
+        });
+      }
+      else
+        setState(() {
+          _dark = false;
+        });
     }
   }
 
@@ -60,9 +68,11 @@ class _State extends State<MyApp> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('dark', _dark);
     } else {
-      File configFile = File('config.bin');
+      File configFile = File('~/.config/rasp_mon/config.json');
       Map config = {};
       config['dark'] = _dark;
+      if (!configFile.existsSync())
+        configFile.createSync(recursive: true);
       configFile.writeAsBytes(utf8.encode(json.encode(config)));
     }
   }
