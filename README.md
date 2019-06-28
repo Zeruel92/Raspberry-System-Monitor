@@ -4,9 +4,7 @@ Monitor di sistema che permette l'avvio e lo stop di alcuni servizi che girano s
 
 ## Compilare su Desktop
 
-L'app è stata testata usando Flutter 1.2.1 e [Flutter Desktop Embedding][2] su Linux, la versione dell'embedder usata è il commit 92fa610.
-Per compilare portarsi nella root del progetto e usare il comando make -C linux_fde.
-Per usare sistemi operativi differenti fare riferimento alle istruzioni su [Flutter Desktop Embedding][2].
+Fare riferimento alle istruzioni su [Flutter Desktop Embedding][2].
 
 ## Getting Started
 
