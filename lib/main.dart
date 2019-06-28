@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart'
@@ -47,7 +48,9 @@ class _State extends State<MyApp> {
         _dark = prefs.getBool('dark') ?? false;
       });
     } else {
-      //TODO: persistance on linux
+      File configFile = File('config.bin');
+      Map config = json.decode(configFile.readAsStringSync());
+      _dark = config['dark'] ?? false;
     }
   }
 
@@ -57,7 +60,10 @@ class _State extends State<MyApp> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('dark', _dark);
     } else {
-      //TODO: persistance on linux
+      File configFile = File('config.bin');
+      Map config = {};
+      config['dark'] = _dark;
+      configFile.writeAsBytes(utf8.encode(json.encode(config)));
     }
   }
 
