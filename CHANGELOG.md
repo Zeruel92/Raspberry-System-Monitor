@@ -1,3 +1,6 @@
+## 1.0.0+26
+Published on Google Play
+
 ## 1.0.0+25
 theme selector
 
