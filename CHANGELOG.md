@@ -1,3 +1,6 @@
+## 1.0.0+28
+publishing on snap store
+
 ## 1.0.0+27
 markdown fix
 
