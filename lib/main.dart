@@ -48,7 +48,7 @@ class _State extends State<MyApp> {
         _dark = prefs.getBool('dark') ?? false;
       });
     } else {
-      File configFile = File('~/.config/rasp_mon/config.json');
+      File configFile = File('.config/rasp_mon/config.json');
       if (configFile.existsSync()) {
         Map config = json.decode(configFile.readAsStringSync());
         setState(() {
@@ -68,7 +68,7 @@ class _State extends State<MyApp> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('dark', _dark);
     } else {
-      File configFile = File('~/.config/rasp_mon/config.json');
+      File configFile = File('.config/rasp_mon/config.json');
       Map config = {};
       config['dark'] = _dark;
       if (!configFile.existsSync())
