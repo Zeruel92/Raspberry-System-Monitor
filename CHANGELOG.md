@@ -1,5 +1,6 @@
 ## 1.0.0+29
-added desktop embedder for windows and mac
+- added desktop embedder for windows and mac
+- fix persistance into snap 
 
 ## 1.0.0+28
 publishing on snap store
