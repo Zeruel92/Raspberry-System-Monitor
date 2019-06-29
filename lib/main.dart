@@ -50,9 +50,9 @@ class _State extends State<MyApp> {
     } else {
       Map<String, String> envVars = Platform.environment;
       File configFile;
-      if (envVars['SNAP_DATA'] != null)
+      if (envVars['SNAP_USER_DATA'] != null)
         configFile =
-            File('${envVars['SNAP_DATA']}/.config/rasp_mon/config.json');
+            File('${envVars['SNAP_USER_DATA']}/.config/rasp_mon/config.json');
       else
         configFile = File('.config/rasp_mon/config.json');
       if (configFile.existsSync()) {
@@ -76,9 +76,9 @@ class _State extends State<MyApp> {
     } else {
       Map<String, String> envVars = Platform.environment;
       File configFile;
-      if (envVars['SNAP_DATA'] != null)
+      if (envVars['SNAP_USER_DATA'] != null)
         configFile =
-            File('${envVars['SNAP_DATA']}/.config/rasp_mon/config.json');
+            File('${envVars['SNAP_USER_DATA']}/.config/rasp_mon/config.json');
       else
         configFile = File('.config/rasp_mon/config.json');
       Map config = {};
