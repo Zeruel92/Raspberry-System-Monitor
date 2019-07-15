@@ -1,3 +1,6 @@
+## 1.0.1+1
+Restyle Grafico
+
 ## 1.0.0+29
 - added desktop embedder for windows and mac
 - fix persistance into snap 

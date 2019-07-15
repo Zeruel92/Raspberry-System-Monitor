@@ -119,12 +119,12 @@ class _TorrentTileState extends State<TorrentTile> {
       stream: Bloc.instance.torrent.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return Card(
-            child: FittedBox(
-              fit: BoxFit.fill,
+          return GestureDetector(
+            onTap: () => _setTorrent(!snap.data.running),
+            child: Card(
               child: Row(
                 children: <Widget>[
-                  Text(snap.data.torrentStatus),
+                  Icon(Icons.file_download),
                   Switch(
                     value: snap.data.running,
                     onChanged: _setTorrent,
@@ -156,15 +156,15 @@ class _TeledartTileState extends State<TeledartTile> {
       stream: Bloc.instance.teledart.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return Card(
-            child: FittedBox(
-              fit: BoxFit.contain,
+          return GestureDetector(
+            onTap: () => _setTeledart(!snap.data.running),
+            child: Card(
               child: Row(
                 children: <Widget>[
                   Icon(Icons.send),
                   Switch(
-                    value: snap.data.running,
-                    onChanged: _setTeledart,
+                      value: snap.data.running,
+                      onChanged: _setTeledart
                   ),
                   snap.data.running ? Text('Teledart On') : Text('Teledart Off')
                 ],
@@ -221,9 +221,9 @@ class _SambaTileState extends State<SambaTile> {
       stream: Bloc.instance.samba.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return Card(
-            child: FittedBox(
-              fit: BoxFit.contain,
+          return GestureDetector(
+            onTap: () => _setSamba(!snap.data.running),
+            child: Card(
               child: Row(
                 children: <Widget>[
                   Icon(Icons.people_outline),
@@ -258,9 +258,9 @@ class _SSHTileState extends State<SSHTile> {
       stream: Bloc.instance.ssh.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return Card(
-            child: FittedBox(
-              fit: BoxFit.contain,
+          return GestureDetector(
+            onTap: () => _setSSH(!snap.data.running),
+            child: Card(
               child: Row(
                 children: <Widget>[
                   Icon(Icons.people_outline),
@@ -295,9 +295,9 @@ class _NetatalkTileState extends State<NetatalkTile> {
       stream: Bloc.instance.apfs.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return Card(
-            child: FittedBox(
-              fit: BoxFit.contain,
+          return GestureDetector(
+            onTap: () => _setNetatalk(!snap.data.running),
+            child: Card(
               child: Row(
                 children: <Widget>[
                   Icon(Icons.people_outline),
@@ -347,4 +347,36 @@ class _DiskTileState extends State<DiskTile> {
     );
   }
 }
+
+class TorrentStats extends StatefulWidget {
+  @override
+  _TorrentStatsState createState() => _TorrentStatsState();
+}
+
+class _TorrentStatsState extends State<TorrentStats> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Bloc.instance.torrent.stream,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          if (snap.data.torrentStatus != '') {
+            return Card(
+              child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text('${snap.data.torrentStatus}')),
+            );
+          }
+          else
+            return Card(
+              child: Text('Il servizio Torrent non è in esecuzione'),
+            );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+}
+
 

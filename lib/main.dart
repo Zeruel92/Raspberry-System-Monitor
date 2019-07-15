@@ -103,27 +103,39 @@ class _State extends State<MyApp> {
           child: Column(
             children: <Widget>[
               Flexible(child: AddressTile(), flex: 1),
-              Flexible(child: LoadAvg(), flex: 4),
-              Flexible(child: DiskTile(), flex: 4,),
-              Flexible(child: TorrentTile(), flex: 7),
-              Flexible(child: TeledartTile(), flex: 2),
-              Flexible(child: SambaTile(), flex: 2),
-              Flexible(child: SSHTile(), flex: 2),
-              Flexible(child: NetatalkTile(), flex: 2)
+              Flexible(child: LoadAvg(), flex: 2),
+              Flexible(child: DiskTile(), flex: 2,),
+              Flexible(child: TorrentStats(), flex: 5),
             ],
           ),
         ),
         drawer: Drawer(
-          child: Column(
+          child: ListView(
             children: <Widget>[
               DrawerHeader(
                 child: Center(child: Text("Impostazioni")),
               ),
-              SwitchListTile(
-                value: _dark,
-                onChanged: _onDarkChanged,
-                title: Text('Darkmode'),
-              )
+              GestureDetector(
+                onTap: () => _onDarkChanged(!_dark),
+                child: Card(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.format_paint),
+                        Switch(
+                          value: _dark,
+                          onChanged: _onDarkChanged,
+                        ),
+                        _dark ? Text('Dark Theme') : Text('Light Theme')
+                      ],
+                    )
+                ),
+              ),
+              Divider(),
+              TeledartTile(),
+              SambaTile(),
+              SSHTile(),
+              NetatalkTile(),
+              TorrentTile()
             ],
           ),
         ),
