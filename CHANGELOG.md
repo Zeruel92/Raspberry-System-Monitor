@@ -1,3 +1,6 @@
+## 1.0.1+30
+fix versioning playstore
+
 ## 1.0.1+1
 Restyle Grafico
 
