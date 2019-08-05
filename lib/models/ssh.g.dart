@@ -15,7 +15,7 @@ class _$SSHStatusSerializer implements StructuredSerializer<SSHStatus> {
   final String wireName = 'SSHStatus';
 
   @override
-  Iterable serialize(Serializers serializers, SSHStatus object,
+  Iterable<Object> serialize(Serializers serializers, SSHStatus object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'running',
@@ -27,7 +27,7 @@ class _$SSHStatusSerializer implements StructuredSerializer<SSHStatus> {
   }
 
   @override
-  SSHStatus deserialize(Serializers serializers, Iterable serialized,
+  SSHStatus deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new SSHStatusBuilder();
 

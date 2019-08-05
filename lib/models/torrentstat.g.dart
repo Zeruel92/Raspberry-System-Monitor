@@ -16,7 +16,7 @@ class _$TorrentStatsSerializer implements StructuredSerializer<TorrentStats> {
   final String wireName = 'TorrentStats';
 
   @override
-  Iterable serialize(Serializers serializers, TorrentStats object,
+  Iterable<Object> serialize(Serializers serializers, TorrentStats object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'torrentStatus',
@@ -31,7 +31,7 @@ class _$TorrentStatsSerializer implements StructuredSerializer<TorrentStats> {
   }
 
   @override
-  TorrentStats deserialize(Serializers serializers, Iterable serialized,
+  TorrentStats deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TorrentStatsBuilder();
 

@@ -1,16 +1,16 @@
 name: raspberry_system_monitor
 description: Raspberry System Monitor
-version: 1.0.1+30
+version: 1.0.1+31
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  rxdart: ^0.21.0
-  http: ^0.12.0+1
-  built_value: ^6.3.2
+  rxdart: ^0.22.1
+  http: ^0.12.0+2
+  built_value: ^6.7.0
   built_collection: any
-  shared_preferences: ^0.5.3+1
+  shared_preferences: ^0.5.3+4
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
@@ -18,9 +18,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
-  built_value_generator: ^6.3.2
-  flutter_launcher_icons: "^0.7.0"
+  build_runner: ^1.6.5
+  built_value_generator: ^6.7.0
+  flutter_launcher_icons: ^0.7.2+1
   
 flutter_icons:
   android: "launcher_icon" 

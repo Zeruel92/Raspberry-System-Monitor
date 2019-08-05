@@ -15,7 +15,7 @@ class _$NetAtalkSerializer implements StructuredSerializer<NetAtalk> {
   final String wireName = 'NetAtalk';
 
   @override
-  Iterable serialize(Serializers serializers, NetAtalk object,
+  Iterable<Object> serialize(Serializers serializers, NetAtalk object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'running',
@@ -27,7 +27,7 @@ class _$NetAtalkSerializer implements StructuredSerializer<NetAtalk> {
   }
 
   @override
-  NetAtalk deserialize(Serializers serializers, Iterable serialized,
+  NetAtalk deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new NetAtalkBuilder();
 

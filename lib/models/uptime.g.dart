@@ -15,7 +15,7 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
   final String wireName = 'Uptime';
 
   @override
-  Iterable serialize(Serializers serializers, Uptime object,
+  Iterable<Object> serialize(Serializers serializers, Uptime object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'time',
@@ -37,7 +37,7 @@ class _$UptimeSerializer implements StructuredSerializer<Uptime> {
   }
 
   @override
-  Uptime deserialize(Serializers serializers, Iterable serialized,
+  Uptime deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UptimeBuilder();
 

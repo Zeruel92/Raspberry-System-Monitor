@@ -15,7 +15,7 @@ class _$SambaSerializer implements StructuredSerializer<Samba> {
   final String wireName = 'Samba';
 
   @override
-  Iterable serialize(Serializers serializers, Samba object,
+  Iterable<Object> serialize(Serializers serializers, Samba object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'running',
@@ -27,7 +27,7 @@ class _$SambaSerializer implements StructuredSerializer<Samba> {
   }
 
   @override
-  Samba deserialize(Serializers serializers, Iterable serialized,
+  Samba deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new SambaBuilder();
 

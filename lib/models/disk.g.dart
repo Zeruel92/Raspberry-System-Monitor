@@ -15,7 +15,7 @@ class _$DiskModelSerializer implements StructuredSerializer<DiskModel> {
   final String wireName = 'DiskModel';
 
   @override
-  Iterable serialize(Serializers serializers, DiskModel object,
+  Iterable<Object> serialize(Serializers serializers, DiskModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'df',
@@ -26,7 +26,7 @@ class _$DiskModelSerializer implements StructuredSerializer<DiskModel> {
   }
 
   @override
-  DiskModel deserialize(Serializers serializers, Iterable serialized,
+  DiskModel deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new DiskModelBuilder();
 

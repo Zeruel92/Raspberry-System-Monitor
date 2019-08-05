@@ -15,7 +15,7 @@ class _$TeledartSerializer implements StructuredSerializer<Teledart> {
   final String wireName = 'Teledart';
 
   @override
-  Iterable serialize(Serializers serializers, Teledart object,
+  Iterable<Object> serialize(Serializers serializers, Teledart object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'running',
@@ -27,7 +27,7 @@ class _$TeledartSerializer implements StructuredSerializer<Teledart> {
   }
 
   @override
-  Teledart deserialize(Serializers serializers, Iterable serialized,
+  Teledart deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TeledartBuilder();
 
