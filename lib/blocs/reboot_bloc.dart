@@ -1,11 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class RebootBloc {
   BehaviorSubject _rebootSubject;
   Sink _rebootSink;
 
   String _addressString;
+
   Sink get sink => _rebootSink;
   Stream _address;
 
@@ -26,7 +30,7 @@ class RebootBloc {
   void _rebootListener(onValue) async {
     try{
       final res = await http.get('http://$_addressString:8888/reboot');
-      print(res.body);
+      Bloc.instance.scaffold.showSnackBar(SnackBar(content: Text(res.body)));
     }catch(e){}
   }
 

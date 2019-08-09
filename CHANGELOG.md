@@ -1,3 +1,6 @@
+## 1.0.2+32
+Snackbar notification
+
 ## 1.0.1+31 
 plugin updates
 

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/blocs/apfs_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/disk_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
@@ -32,6 +33,14 @@ class Bloc {
   Sink _sinkAddress;
 
   Stream get address => _indirizzoRaspberrySubject.stream;
+
+  GlobalKey<ScaffoldState> _scaffoldState;
+
+  void setScaffoldState(GlobalKey<ScaffoldState> scaffoldState) =>
+      _scaffoldState = scaffoldState;
+
+
+  ScaffoldState get scaffold => _scaffoldState.currentState;
 
   Bloc._private() {
     _indirizzoRaspberrySubject = new BehaviorSubject();

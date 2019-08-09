@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class PoweroffBloc {
   BehaviorSubject _powerOffSubject;
   Sink _powerOffSink;
   Stream _address;
+
   Sink get sink => _powerOffSink;
 
   String _addressString;
@@ -22,7 +26,7 @@ class PoweroffBloc {
   void _powerOffListener(onValue) async {
     try {
       final res = await http.get('http://$_addressString:8888/poweroff');
-      print(res.body);
+      Bloc.instance.scaffold.showSnackBar(SnackBar(content: Text(res.body)));
     }catch(e){}
   }
 

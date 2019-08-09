@@ -33,12 +33,15 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
   bool _dark;
+  GlobalKey<ScaffoldState> _scaffoldState;
 
   @override
   void initState() {
     super.initState();
     _dark = false;
     _loadPrefs();
+    _scaffoldState = GlobalKey<ScaffoldState>();
+    Bloc.instance.setScaffoldState(_scaffoldState);
   }
 
   void _loadPrefs() async {
@@ -95,6 +98,7 @@ class _State extends State<MyApp> {
       title: 'Raspberry System Monitor',
       theme: _dark ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
+        key: _scaffoldState,
         appBar: AppBar(
           title: Text('Raspberry System Monitor'),
           actions: <Widget>[PowerOffButton(), RebootButton()],
