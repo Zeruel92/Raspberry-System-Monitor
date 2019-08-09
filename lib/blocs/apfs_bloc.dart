@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/apfs.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class NetAtalkBloc {
   BehaviorSubject<NetAtalk> _subject;
@@ -15,11 +18,12 @@ class NetAtalkBloc {
   Stream _address;
 
   Stream get stream => _stream;
+
   Sink get sink => _tSink;
 
   NetAtalkBloc(Stream address) {
     _subject =
-        new BehaviorSubject.seeded(NetAtalk((apfs) => apfs..running = false));
+    new BehaviorSubject.seeded(NetAtalk((apfs) => apfs..running = false));
     _toggleSubject = new BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
@@ -32,7 +36,12 @@ class NetAtalkBloc {
   }
 
   void _afpToggleListener(toggle) async {
-    await http.post('http://$_addressString:8888/netatalk/$toggle');
+    try {
+      await http.post('http://$_addressString:8888/netatalk/$toggle');
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
+    }
   }
 
   void _update(String address) async {
@@ -41,6 +50,8 @@ class NetAtalkBloc {
       final res = await http.get('http://$_addressString:8888/netatalk/1');
       _apfsSink.add(NetAtalk.fromJson(res.body));
     }catch(e){
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 

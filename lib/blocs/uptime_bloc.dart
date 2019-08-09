@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/uptime.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class UptimeBloc {
   BehaviorSubject<Uptime> _uptimeSubject;
@@ -9,6 +12,7 @@ class UptimeBloc {
 
   Stream _uptimeStream;
   Stream _address;
+
   Stream get stream => _uptimeStream;
 
   UptimeBloc(Stream address) {
@@ -25,7 +29,10 @@ class UptimeBloc {
     try{
       final res = await http.get('http://$address:8888/uptime');
       _sinkUptime.add(Uptime.fromJson(res.body));
-    }catch (e){}
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
+    }
   }
 
   void close() {

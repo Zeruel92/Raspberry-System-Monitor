@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/ssh.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class SSHBloc {
   BehaviorSubject<SSHStatus> _subject;
@@ -15,11 +18,12 @@ class SSHBloc {
   Stream _address;
 
   Stream get stream => _stream;
+
   Sink get sink => _tSink;
 
   SSHBloc(Stream address) {
     _subject =
-        new BehaviorSubject.seeded(SSHStatus((ssh) => ssh..running = false));
+    new BehaviorSubject.seeded(SSHStatus((ssh) => ssh..running = false));
     _toggleSubject = new BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
@@ -35,6 +39,8 @@ class SSHBloc {
     try {
       await http.post('http://$_addressString:8888/ssh/$toggle');
     }catch (e){
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 
@@ -44,6 +50,8 @@ class SSHBloc {
       final res = await http.get('http://$_addressString:8888/ssh/1');
       _sshSink.add(SSHStatus.fromJson(res.body));
     }catch (e){
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 

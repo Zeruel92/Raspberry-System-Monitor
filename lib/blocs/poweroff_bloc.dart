@@ -26,8 +26,12 @@ class PoweroffBloc {
   void _powerOffListener(onValue) async {
     try {
       final res = await http.get('http://$_addressString:8888/poweroff');
-      Bloc.instance.scaffold.showSnackBar(SnackBar(content: Text(res.body)));
-    }catch(e){}
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text(res.body.toString())));
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
+    }
   }
 
   void _update(String address) {

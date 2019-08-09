@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/teledart.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class TeledartBloc {
   BehaviorSubject<Teledart> _teledartSubject;
@@ -15,11 +18,12 @@ class TeledartBloc {
   Stream _address;
 
   Stream get stream => _teledartStream;
+
   Sink get sink => _teledartToggleSink;
 
   TeledartBloc(Stream address) {
     _teledartSubject =
-        new BehaviorSubject.seeded(Teledart((t) => t..running = false));
+    new BehaviorSubject.seeded(Teledart((t) => t..running = false));
     _teledartToggleSubject = new BehaviorSubject();
     _teledartToggleSink = _teledartToggleSubject.sink;
     _teledartStream = _teledartSubject.stream;
@@ -34,7 +38,9 @@ class TeledartBloc {
   void _teledartToggleListener(toggle) async {
     try {
       await http.post('http://$_addressString:8888/teledart/$toggle');
-    }finally{
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 
@@ -44,6 +50,8 @@ class TeledartBloc {
       final res = await http.get('http://$_addressString:8888/teledart/1');
       _teledartSink.add(Teledart.fromJson(res.body));
     }catch (e){
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 

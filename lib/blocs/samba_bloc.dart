@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/samba.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class SambaBloc {
   BehaviorSubject<Samba> _subject;
@@ -15,11 +18,12 @@ class SambaBloc {
   Stream _address;
 
   Stream get stream => _stream;
+
   Sink get sink => _tSink;
 
   SambaBloc(Stream address) {
     _subject =
-        new BehaviorSubject.seeded(Samba((samba) => samba..running = false));
+    new BehaviorSubject.seeded(Samba((samba) => samba..running = false));
     _toggleSubject = new BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
@@ -34,7 +38,10 @@ class SambaBloc {
   void _sambaToggleListener(toggle) async {
     try{
       await http.post('http://$_addressString:8888/smb/$toggle');
-    }catch(e){}
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
+    }
   }
 
   void _update(String address) async {
@@ -42,7 +49,10 @@ class SambaBloc {
     try {
       final res = await http.get('http://$_addressString:8888/smb/1');
       _sambaSink.add(Samba.fromJson(res.body));
-    }catch(e){}
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
+    }
   }
 
   void close() {

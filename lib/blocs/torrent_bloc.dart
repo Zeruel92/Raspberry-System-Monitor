@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/torrentstat.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class TorrentBloc {
   BehaviorSubject<TorrentStats> _torrentSubject;
@@ -15,6 +18,7 @@ class TorrentBloc {
   String _addressString;
 
   Stream get stream => _torrentStream;
+
   Sink get sink => _torrentToggleSink;
 
   TorrentBloc(Stream address) {
@@ -38,6 +42,8 @@ class TorrentBloc {
       final res = await http.get('http://$_addressString:8888/torrentstatus/1');
       _torrentSink.add(TorrentStats.fromJson(res.body));
     }catch(e){
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 
@@ -45,6 +51,8 @@ class TorrentBloc {
     try{
       await http.post('http://$_addressString:8888/torrentstatus/$toggle');
     }catch(e){
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
     }
   }
 

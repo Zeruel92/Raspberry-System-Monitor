@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/disk.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'bloc.dart';
 
 class DiskBloc {
   BehaviorSubject<DiskModel> _diskSubject;
@@ -8,6 +11,7 @@ class DiskBloc {
 
   Stream _diskStream;
   Stream _address;
+
   Stream get stream => _diskStream;
 
   DiskBloc(Stream address) {
@@ -24,7 +28,10 @@ class DiskBloc {
     try{
       final res = await http.get('http://$address:8888/disks');
       _sinkDisk.add(DiskModel.fromJson(res.body));
-    }catch (e){}
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(
+          SnackBar(content: Text('${e.toString()}'),));
+    }
   }
 
   void close() {
