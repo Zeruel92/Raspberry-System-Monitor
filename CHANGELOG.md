@@ -1,3 +1,6 @@
+## 1.0.2+34
+fastlane support
+
 ## 1.0.2+33
 catch now have snack notification
 

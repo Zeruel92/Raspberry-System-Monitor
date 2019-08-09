@@ -1,0 +1,8 @@
+Quest'app permette di facilitare la gestione di alcuni servizi in uso su sistemi RaspberryPi. Per funzionare necessita che sia installato sul sistema RaspberryPi il server backend.
+
+Per maggiori informazioni fare riferimento alle pagine:
+
+https://github.com/pspgt/Raspberry-System-Monitor
+https://github.com/pspgt/Raspberry-System-Monitor-Server
+
+L' app è rilasciata sotto Licenza MIT.

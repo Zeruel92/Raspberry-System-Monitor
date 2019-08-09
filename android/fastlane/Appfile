@@ -1,0 +1,2 @@
+json_key_file("/data/.android/api-5935518953463943516-721296-f357ee8c4e18.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("it.zeruel.raspberry_system_monitor") # e.g. com.krausefx.app
