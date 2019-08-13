@@ -1,3 +1,6 @@
+## 1.0.2+35
+fix torrent card
+
 ## 1.0.2+34
 fastlane support
 
