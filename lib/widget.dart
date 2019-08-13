@@ -360,13 +360,11 @@ class _TorrentStatsState extends State<TorrentStats> {
       stream: Bloc.instance.torrent.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-            return Card(
+          return (snap.data.torrentStatus != '') ? Card(
               child: FittedBox(
                   fit: BoxFit.contain,
-                  child: (snap.data.torrentStatus != '') ?
-                  Text('${snap.data.torrentStatus}') :
-                  Text('Il servizio Torrent non è attivo'))
-            );
+                  child: Text('${snap.data.torrentStatus}'))
+          ) : Container();
         } else {
           return Container();
         }
