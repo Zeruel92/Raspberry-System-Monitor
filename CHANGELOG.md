@@ -1,3 +1,6 @@
+## 1.0.2+36
+updated linux embedder
+
 ## 1.0.2+35
 fix torrent card
 
