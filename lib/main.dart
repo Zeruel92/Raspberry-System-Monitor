@@ -95,6 +95,7 @@ class _State extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: Platform.isLinux ? false : true,
       title: 'Raspberry System Monitor',
       theme: _dark ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
