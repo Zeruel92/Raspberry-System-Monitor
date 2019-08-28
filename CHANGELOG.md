@@ -1,3 +1,6 @@
+## 1.0.2+37
+removed debug badge from linux builds
+
 ## 1.0.2+36
 updated linux embedder
 
