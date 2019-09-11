@@ -1,6 +1,4 @@
 ## 1.0.2+38 
-proguard rules
-minify & obfuscation code
 dependency update
 
 ## 1.0.2+37
