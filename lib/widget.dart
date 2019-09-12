@@ -162,10 +162,7 @@ class _TeledartTileState extends State<TeledartTile> {
               child: Row(
                 children: <Widget>[
                   Icon(Icons.send),
-                  Switch(
-                      value: snap.data.running,
-                      onChanged: _setTeledart
-                  ),
+                  Switch(value: snap.data.running, onChanged: _setTeledart),
                   snap.data.running ? Text('Teledart On') : Text('Teledart Off')
                 ],
               ),
@@ -360,11 +357,12 @@ class _TorrentStatsState extends State<TorrentStats> {
       stream: Bloc.instance.torrent.stream,
       builder: (context, AsyncSnapshot snap) {
         if (snap.hasData) {
-          return (snap.data.torrentStatus != '') ? Card(
+          return (snap.data.torrentStatus != '')
+              ? Card(
               child: FittedBox(
                   fit: BoxFit.contain,
-                  child: Text('${snap.data.torrentStatus}'))
-          ) : Container();
+                  child: Text('${snap.data.torrentStatus}')))
+              : Container();
         } else {
           return Container();
         }
@@ -373,4 +371,39 @@ class _TorrentStatsState extends State<TorrentStats> {
   }
 }
 
+class PiholeListTile extends StatefulWidget {
+  @override
+  _PiholeListTileState createState() => _PiholeListTileState();
+}
 
+class _PiholeListTileState extends State<PiholeListTile> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Bloc.instance.pihole.stream,
+      builder: (context, AsyncSnapshot snap) {
+        if (snap.hasData) {
+          return GestureDetector(
+            onTap: () => _setPihole(!snap.data.running),
+            child: Card(
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.block),
+                  Switch(
+                    value: snap.data.running,
+                    onChanged: _setPihole,
+                  ),
+                  snap.data.running ? Text('Pihole On') : Text('Pihole Off')
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Card(child: Placeholder());
+        }
+      },
+    );
+  }
+
+  void _setPihole(bool t) => Bloc.instance.pihole.sink.add(t);
+}

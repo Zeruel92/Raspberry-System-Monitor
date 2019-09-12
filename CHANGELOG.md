@@ -1,3 +1,6 @@
+## 1.0.2+39
+pihole switch control
+
 ## 1.0.2+38 
 dependency update
 

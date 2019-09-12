@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/blocs/apfs_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/disk_bloc.dart';
+import 'package:raspberry_system_monitor/blocs/pihole_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/poweroff_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/samba_bloc.dart';
@@ -27,6 +28,7 @@ class Bloc {
   SSHBloc ssh;
   NetAtalkBloc apfs;
   DiskBloc disk;
+  PiholeBloc pihole;
 
   BehaviorSubject _indirizzoRaspberrySubject;
 
@@ -38,7 +40,6 @@ class Bloc {
 
   void setScaffoldState(GlobalKey<ScaffoldState> scaffoldState) =>
       _scaffoldState = scaffoldState;
-
 
   ScaffoldState get scaffold => _scaffoldState.currentState;
 
@@ -53,6 +54,7 @@ class Bloc {
     ssh = SSHBloc(address);
     apfs = NetAtalkBloc(address);
     disk = DiskBloc(address);
+    pihole = PiholeBloc(address);
     _sinkAddress = _indirizzoRaspberrySubject.sink;
     _socketListen();
   }

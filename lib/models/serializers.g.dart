@@ -9,6 +9,7 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(DiskModel.serializer)
       ..add(NetAtalk.serializer)
+      ..add(Pihole.serializer)
       ..add(SSHStatus.serializer)
       ..add(Samba.serializer)
       ..add(Teledart.serializer)

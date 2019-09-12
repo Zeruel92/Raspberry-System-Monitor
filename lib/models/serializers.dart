@@ -9,9 +9,20 @@ import 'uptime.dart';
 import 'torrentstat.dart';
 import 'teledart.dart';
 import 'samba.dart';
+import 'pihole.dart';
+
 part 'serializers.g.dart';
 
 @SerializersFor(
-    const [Uptime, TorrentStats, Teledart, Samba, SSHStatus, NetAtalk, DiskModel])
+    const [
+      Uptime,
+      TorrentStats,
+      Teledart,
+      Samba,
+      SSHStatus,
+      NetAtalk,
+      DiskModel,
+      Pihole
+    ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
