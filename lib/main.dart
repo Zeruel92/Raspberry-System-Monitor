@@ -140,7 +140,8 @@ class _State extends State<MyApp> {
               SambaTile(),
               SSHTile(),
               NetatalkTile(),
-              TorrentTile()
+              TorrentTile(),
+              PiholeTile()
             ],
           ),
         ),

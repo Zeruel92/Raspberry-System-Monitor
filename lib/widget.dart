@@ -371,12 +371,12 @@ class _TorrentStatsState extends State<TorrentStats> {
   }
 }
 
-class PiholeListTile extends StatefulWidget {
+class PiholeTile extends StatefulWidget {
   @override
-  _PiholeListTileState createState() => _PiholeListTileState();
+  _PiholeTileState createState() => _PiholeTileState();
 }
 
-class _PiholeListTileState extends State<PiholeListTile> {
+class _PiholeTileState extends State<PiholeTile> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
