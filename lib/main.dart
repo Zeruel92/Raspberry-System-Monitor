@@ -63,8 +63,7 @@ class _State extends State<MyApp> {
         setState(() {
           _dark = config['dark'] ?? false;
         });
-      }
-      else
+      } else
         setState(() {
           _dark = false;
         });
@@ -86,8 +85,7 @@ class _State extends State<MyApp> {
         configFile = File('.config/rasp_mon/config.json');
       Map config = {};
       config['dark'] = _dark;
-      if (!configFile.existsSync())
-        configFile.createSync(recursive: true);
+      if (!configFile.existsSync()) configFile.createSync(recursive: true);
       configFile.writeAsBytes(utf8.encode(json.encode(config)));
     }
   }
@@ -98,6 +96,9 @@ class _State extends State<MyApp> {
       debugShowCheckedModeBanner: Platform.isLinux ? false : true,
       title: 'Raspberry System Monitor',
       theme: _dark ? ThemeData.dark() : ThemeData.light(),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       home: Scaffold(
         key: _scaffoldState,
         appBar: AppBar(
@@ -109,7 +110,10 @@ class _State extends State<MyApp> {
             children: <Widget>[
               Flexible(child: AddressTile(), flex: 1),
               Flexible(child: LoadAvg(), flex: 2),
-              Flexible(child: DiskTile(), flex: 2,),
+              Flexible(
+                child: DiskTile(),
+                flex: 2,
+              ),
               Flexible(child: TorrentStats(), flex: 5),
             ],
           ),
@@ -124,16 +128,15 @@ class _State extends State<MyApp> {
                 onTap: () => _onDarkChanged(!_dark),
                 child: Card(
                     child: Row(
-                      children: <Widget>[
-                        Icon(Icons.format_paint),
-                        Switch(
-                          value: _dark,
-                          onChanged: _onDarkChanged,
-                        ),
-                        _dark ? Text('Dark Theme') : Text('Light Theme')
-                      ],
-                    )
-                ),
+                  children: <Widget>[
+                    Icon(Icons.format_paint),
+                    Switch(
+                      value: _dark,
+                      onChanged: _onDarkChanged,
+                    ),
+                    _dark ? Text('Dark Theme') : Text('Light Theme')
+                  ],
+                )),
               ),
               Divider(),
               TeledartTile(),

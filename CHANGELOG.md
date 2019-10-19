@@ -1,3 +1,6 @@
+## 1.0.2+40
+Dark mode System wide (Android9+/iOS13)
+
 ## 1.0.2+39
 pihole switch control
 
