@@ -1,4 +1,7 @@
-## 1,0,2,+41 
+## 1.0.2+42
+linux embedder upgrade (flutter 1.10.15-pre.186/flutter desktop master/9e5ee41da03e2a6224614c2bc38b3c6dbc3bab3c)
+
+## 1.0.2+41 
 dependency upgrade
 
 ## 1.0.2+40
