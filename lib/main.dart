@@ -127,16 +127,17 @@ class _State extends State<MyApp> {
               GestureDetector(
                 onTap: () => _onDarkChanged(!_dark),
                 child: Card(
-                    child: Row(
-                  children: <Widget>[
-                    Icon(Icons.format_paint),
-                    Switch(
-                      value: _dark,
-                      onChanged: _onDarkChanged,
-                    ),
-                    _dark ? Text('Dark Theme') : Text('Light Theme')
-                  ],
-                )),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.format_paint),
+                      Switch(
+                        value: _dark,
+                        onChanged: _onDarkChanged,
+                      ),
+                      _dark ? Text('Dark Theme') : Text('Light Theme')
+                    ],
+                  ),
+                ),
               ),
               Divider(),
               TeledartTile(),
