@@ -28,6 +28,9 @@
 /build/
 pubspec.lock
 
+#Generated Files
+**/lib/models/*.g.dart
+
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
