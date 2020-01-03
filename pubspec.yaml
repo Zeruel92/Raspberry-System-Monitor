@@ -1,15 +1,15 @@
 name: raspberry_system_monitor
 description: Raspberry System Monitor
-version: 1.0.2+43
+version: 1.0.2+45
 
 environment:
   sdk: ">=2.5.0 <3.0.0"
 
 dependencies:
   rxdart: ^0.23.1
-  http: ^0.12.0+2
-  built_value: ^7.0.0
-  built_collection: ^4.3.0
+  http: ^0.12.0+3
+  built_value: ^7.0.4
+  built_collection: ^4.3.2
   shared_preferences: ^0.5.6
   flutter:
     sdk: flutter
@@ -19,7 +19,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^1.7.2
-  built_value_generator: ^7.0.0
+  built_value_generator: ^7.0.4
   flutter_launcher_icons: ^0.7.4
 
 flutter_icons:
