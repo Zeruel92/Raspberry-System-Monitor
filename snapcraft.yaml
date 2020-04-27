@@ -20,5 +20,5 @@ parts:
 
 apps:
   raspberrymonitor:
-    command: ./release/raspberryMonitor
+    command: ./release/raspberry_system_monitor
     plugs: [opengl, x11, network, network-bind, desktop]
