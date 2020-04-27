@@ -1,7 +1,7 @@
 include app_configuration.mk
 
 # Default build type.
-BUILD=debug
+BUILD=release
 
 FLUTTER_MANAGED_DIR=flutter
 FLUTTER_EPHEMERAL_DIR=$(FLUTTER_MANAGED_DIR)/ephemeral
