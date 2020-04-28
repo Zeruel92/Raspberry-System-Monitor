@@ -9,13 +9,6 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 icon: assets/icon.png
 
-plugs:
-  kde-frameworks-5-plug:
-    content: kde-frameworks-5-core18-all
-    interface: content
-    default-provider: kde-frameworks-5-core18
-    target: kf5
-
 parts:
   raspberrymonitor:
     stage-packages:
@@ -28,4 +21,4 @@ parts:
 apps:
   raspberrymonitor:
     command: ./release/raspberry_system_monitor
-    plugs: [opengl, x11, network, network-bind, desktop, kde-frameworks-5-plug, desktop-legacy]
+    plugs: [opengl, x11, wayland, network, network-bind, desktop, desktop-legacy]
