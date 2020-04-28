@@ -12,13 +12,22 @@ icon: assets/icon.png
 parts:
   raspberrymonitor:
     stage-packages:
-    - libgl1
-    - libgtk-3-dev
-    - libglfw3
+      - libgl1
+      - libgtk-3-dev
+      - libglfw3
+      - libgl1-mesa-dri
+      - libqt5core5a
+      - libqt5network5
+      - libxcomposite1
+      - libxcursor1
+      - libxinerama1
+      - libxrandr2
+      - libatk1.0-0
+      - libgtk2.0-0
     plugin: dump
     source: build/linux/1.zip
 
 apps:
   raspberrymonitor:
     command: ./release/raspberry_system_monitor
-    plugs: [opengl, x11, network, network-bind, desktop]
+    plugs: [opengl, x11, wayland, network, network-bind, desktop, desktop-legacy]
