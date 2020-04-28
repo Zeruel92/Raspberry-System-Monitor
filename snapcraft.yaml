@@ -21,4 +21,4 @@ parts:
 apps:
   raspberrymonitor:
     command: ./release/raspberry_system_monitor
-    plugs: [opengl, x11, network, network-bind, desktop]
+    plugs: [opengl, x11, network, network-bind, desktop, kde-frameworks-5-plug, desktop-legacy]
