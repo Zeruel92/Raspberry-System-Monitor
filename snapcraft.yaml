@@ -29,5 +29,5 @@ parts:
 
 apps:
   raspberrymonitor:
-    command: ./release/raspberry_system_monitor
+    command: desktop-launch $SNAP/release/raspberry_system_monitor
     plugs: [opengl, x11, wayland, network, network-bind, desktop, desktop-legacy]
