@@ -10,6 +10,7 @@ import 'landing.dart';
 
 void main() {
   _setTargetPlatformForDesktop();
+  final instance = Bloc.instance;
   runApp(MyApp());
 }
 
@@ -44,7 +45,8 @@ class _State extends State<MyApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: Platform.isLinux ? false : true,
             title: 'Raspberry System Monitor',
-            theme: snapshot.data ? ThemeData.dark() : ThemeData.light(),
+            theme:
+                snapshot.data ?? false ? ThemeData.dark() : ThemeData.light(),
             darkTheme: ThemeData(
               brightness: Brightness.dark,
             ),

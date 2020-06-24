@@ -55,10 +55,10 @@ class _HomeState extends State<Home> {
                         children: <Widget>[
                           Icon(Icons.format_paint),
                           Switch(
-                            value: snapshot.data,
+                            value: snapshot.data ?? false,
                             onChanged: Bloc.instance.theme.sink.add,
                           ),
-                          snapshot.data
+                          snapshot.data ?? false
                               ? Text('Dark Theme')
                               : Text('Light Theme')
                         ],
