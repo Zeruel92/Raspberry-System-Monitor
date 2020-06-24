@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -14,10 +15,11 @@ class ThemeBloc {
   Sink get sink => _sink;
 
   ThemeBloc() {
-    _dark = BehaviorSubject.seeded(false);
+    _dark = BehaviorSubject();
     _sink = _dark.sink;
     _stream = _dark.stream;
-    _dark.listen((value) => _onDarkChanged);
+    _loadPrefs();
+    _dark.listen((value) => _onDarkChanged(value));
   }
 
   void _onDarkChanged(bool changed) async {
@@ -40,9 +42,10 @@ class ThemeBloc {
   }
 
   void _loadPrefs() async {
+    bool dark = false;
     if ((Platform.isAndroid) || (Platform.isIOS)) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      sink.add(prefs.getBool('dark') ?? false);
+      dark = prefs.getBool('dark') ?? false;
     } else {
       Map<String, String> envVars = Platform.environment;
       File configFile;
@@ -53,9 +56,10 @@ class ThemeBloc {
         configFile = File('.config/rasp_mon/config.json');
       if (configFile.existsSync()) {
         Map config = json.decode(configFile.readAsStringSync());
-        sink.add(config['dark'] ?? false);
+        dark = config['dark'] ?? false;
       } else
-        sink.add(false);
+        dark = false;
     }
+    _sink.add(dark);
   }
 }
