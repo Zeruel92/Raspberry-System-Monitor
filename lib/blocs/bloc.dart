@@ -11,6 +11,7 @@ import 'package:raspberry_system_monitor/blocs/reboot_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/samba_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/ssh_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/teledard_bloc.dart';
+import 'package:raspberry_system_monitor/blocs/theme_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/torrent_bloc.dart';
 import 'package:raspberry_system_monitor/blocs/uptime_bloc.dart';
 import 'package:rxdart/rxdart.dart';
@@ -29,6 +30,7 @@ class Bloc {
   NetAtalkBloc apfs;
   DiskBloc disk;
   PiholeBloc pihole;
+  ThemeBloc theme;
 
   BehaviorSubject _indirizzoRaspberrySubject;
 
@@ -55,6 +57,7 @@ class Bloc {
     apfs = NetAtalkBloc(address);
     disk = DiskBloc(address);
     pihole = PiholeBloc(address);
+    theme = ThemeBloc();
     _sinkAddress = _indirizzoRaspberrySubject.sink;
     _socketListen();
   }

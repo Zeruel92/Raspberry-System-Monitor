@@ -17,9 +17,9 @@ parts:
       - libgtk-3-dev
       - libglfw3
     plugin: dump
-    source: build/linux/1.zip
+    source: build/linux/release/bundle.zip
 
 apps:
   raspberrymonitor:
-    command: desktop-launch $SNAP/release/raspberry_system_monitor
+    command: desktop-launch $SNAP/bundle/raspberry_system_monitor
     plugs: [opengl, x11, wayland, network, network-bind, desktop, desktop-legacy]
