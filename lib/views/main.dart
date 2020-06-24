@@ -10,7 +10,6 @@ import 'landing.dart';
 
 void main() {
   _setTargetPlatformForDesktop();
-  final instance = Bloc.instance;
   runApp(MyApp());
 }
 
@@ -50,9 +49,9 @@ class _State extends State<MyApp> {
             darkTheme: ThemeData(
               brightness: Brightness.dark,
             ),
-            initialRoute: '/',
+            initialRoute: '/landing',
             routes: {
-              '/': (context) => Home(),
+              '/home': (context) => Home(),
               '/landing': (context) => Landing()
             },
           );

@@ -29,3 +29,5 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/pi4_board_new.png
