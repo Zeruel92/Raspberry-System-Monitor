@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart'
 import 'package:flutter/material.dart';
 import 'package:raspberry_system_monitor/blocs/bloc.dart';
 
-import 'home.dart';
-import 'landing.dart';
+import 'views/home.dart';
+import 'views/landing.dart';
 
 void main() {
   _setTargetPlatformForDesktop();
