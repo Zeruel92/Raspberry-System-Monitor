@@ -82,3 +82,4 @@ pubspec.lock
 *.snap
 *.xdelta3
 /ios/Flutter/flutter_export_environment.sh
+.config/
