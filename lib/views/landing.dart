@@ -67,7 +67,7 @@ class _LandingState extends State<Landing> {
                             borderRadius: BorderRadius.circular(10000.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.white.withOpacity(opacity),
+                                color: Colors.cyanAccent.withOpacity(opacity),
                                 blurRadius: 6.0,
                                 spreadRadius: 0.0,
                               )
@@ -75,7 +75,7 @@ class _LandingState extends State<Landing> {
                       ),
                     ),
                   ),
-                  Text('Searching for rapsberry in local network')
+                  Text('Waiting for Raspberrypi in local network')
                 ],
               );
             }),
