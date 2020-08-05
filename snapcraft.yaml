@@ -14,6 +14,29 @@ parts:
     source: .
     plugin: flutter
     flutter-target: lib/main.dart
+    stage-packages:
+      - libatk-bridge2.0-0
+      - libatk1.0-0
+      - libatspi2.0-0
+      - libcairo-gobject2
+      - libcairo2
+      - libdatrie1
+      - libegl1
+      - libepoxy0
+      - libfontconfig1
+      - libfreetype6
+      - libgdk-pixbuf2.0-0
+      - libglvnd0
+      - libgraphite2-3
+      - libgtk-3-0
+      - libharfbuzz0b
+      - libpango-1.0-0
+      - libpangocairo-1.0-0
+      - libpangoft2-1.0-0
+      - libpixman-1-0
+      - libpng16-16
+      - libthai0
+      - libwayland-client0
 
 apps:
   raspberrymonitor:
