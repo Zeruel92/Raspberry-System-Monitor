@@ -6,31 +6,31 @@ import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
 class PiholeBloc {
-  BehaviorSubject<Pihole> _subject;
-  BehaviorSubject<bool> _toggleSubject;
+  late BehaviorSubject<Pihole> _subject;
+  late BehaviorSubject<bool> _toggleSubject;
 
-  Stream _stream;
-  String _addressString;
+  late Stream _stream;
+  late String _addressString;
 
-  Sink _tSink;
-  Sink _piholeSink;
+  late Sink _tSink;
+  late Sink _piholeSink;
 
-  Stream _address;
+  Stream? _address;
 
   Stream get stream => _stream;
 
   Sink get sink => _tSink;
 
-  PiholeBloc(Stream address) {
+  PiholeBloc(Stream? address) {
     _subject =
-        new BehaviorSubject.seeded(Pihole((pihole) => pihole..running = false));
-    _toggleSubject = new BehaviorSubject();
+        BehaviorSubject.seeded(Pihole((pihole) => pihole..running = false));
+    _toggleSubject = BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
     _piholeSink = _subject.sink;
     _toggleSubject.listen(_toggleListener);
     _address = address;
-    _address.listen((address) {
+    _address?.listen((address) {
       if (address != null) _update(address.address);
     });
   }

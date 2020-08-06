@@ -9,11 +9,11 @@ class Landing extends StatefulWidget {
 }
 
 class _LandingState extends State<Landing> {
-  double start;
-  double end;
-  bool animation;
-  StreamSubscription streamListener;
-  GlobalKey<ScaffoldState> _scaffoldState;
+  late double start;
+  late double end;
+  late bool animation;
+  StreamSubscription? streamListener;
+  late GlobalKey<ScaffoldState> _scaffoldState;
 
   @override
   void initState() {
@@ -86,7 +86,7 @@ class _LandingState extends State<Landing> {
   @override
   void dispose() {
     animation = false;
-    streamListener.cancel();
+    streamListener?.cancel();
     streamListener = null;
     super.dispose();
   }

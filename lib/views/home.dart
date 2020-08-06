@@ -9,7 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  GlobalKey<ScaffoldState> _scaffoldState;
+  late GlobalKey<ScaffoldState> _scaffoldState;
 
   @override
   void initState() {

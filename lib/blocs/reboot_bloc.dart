@@ -5,20 +5,20 @@ import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
 class RebootBloc {
-  BehaviorSubject _rebootSubject;
-  Sink _rebootSink;
+  late BehaviorSubject _rebootSubject;
+  late Sink _rebootSink;
 
-  String _addressString;
+  late String _addressString;
 
   Sink get sink => _rebootSink;
-  Stream _address;
+  Stream? _address;
 
-  RebootBloc(Stream address) {
-    _rebootSubject = new BehaviorSubject();
+  RebootBloc(Stream? address) {
+    _rebootSubject = BehaviorSubject();
     _rebootSink = _rebootSubject.sink;
     _rebootSubject.listen(_rebootListener);
     _address = address;
-    _address.listen((address) {
+    _address?.listen((address) {
       if (address != null) _update(address.address);
     });
   }
@@ -28,13 +28,14 @@ class RebootBloc {
   }
 
   void _rebootListener(onValue) async {
-    try{
+    try {
       final res = await http.get('http://$_addressString:8888/reboot');
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${res.body}')));
+      Bloc.instance.scaffold
+          .showSnackBar(SnackBar(content: Text('${res.body}')));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+      Bloc.instance.scaffold.showSnackBar(SnackBar(
+        content: Text('${e.toString()}'),
+      ));
     }
   }
 

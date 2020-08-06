@@ -6,31 +6,31 @@ import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
 class NetAtalkBloc {
-  BehaviorSubject<NetAtalk> _subject;
-  BehaviorSubject<bool> _toggleSubject;
+  late BehaviorSubject<NetAtalk> _subject;
+  late BehaviorSubject<bool> _toggleSubject;
 
-  Stream _stream;
-  String _addressString;
+  late Stream _stream;
+  late String _addressString;
 
-  Sink _tSink;
-  Sink _apfsSink;
+  late Sink _tSink;
+  late Sink _apfsSink;
 
-  Stream _address;
+  Stream? _address;
 
   Stream get stream => _stream;
 
   Sink get sink => _tSink;
 
-  NetAtalkBloc(Stream address) {
+  NetAtalkBloc(Stream? address) {
     _subject =
-    new BehaviorSubject.seeded(NetAtalk((apfs) => apfs..running = false));
-    _toggleSubject = new BehaviorSubject();
+        BehaviorSubject.seeded(NetAtalk((apfs) => apfs..running = false));
+    _toggleSubject = BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
     _apfsSink = _subject.sink;
     _toggleSubject.listen(_afpToggleListener);
     _address = address;
-    _address.listen((address) {
+    _address?.listen((address) {
       if (address != null) _update(address.address);
     });
   }
@@ -39,8 +39,9 @@ class NetAtalkBloc {
     try {
       await http.post('http://$_addressString:8888/netatalk/$toggle');
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+      Bloc.instance.scaffold.showSnackBar(SnackBar(
+        content: Text('${e.toString()}'),
+      ));
     }
   }
 
@@ -49,9 +50,10 @@ class NetAtalkBloc {
     try {
       final res = await http.get('http://$_addressString:8888/netatalk/1');
       _apfsSink.add(NetAtalk.fromJson(res.body));
-    }catch(e){
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(SnackBar(
+        content: Text('${e.toString()}'),
+      ));
     }
   }
 

@@ -6,32 +6,32 @@ import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
 class TorrentBloc {
-  BehaviorSubject<TorrentStats> _torrentSubject;
-  BehaviorSubject<bool> _torrentToggleSubject;
+  late BehaviorSubject<TorrentStats> _torrentSubject;
+  late BehaviorSubject<bool> _torrentToggleSubject;
 
-  Sink _torrentSink;
-  Sink _torrentToggleSink;
+  late Sink _torrentSink;
+  late Sink _torrentToggleSink;
 
-  Stream _torrentStream;
-  Stream _address;
+  late Stream _torrentStream;
+  Stream? _address;
 
-  String _addressString;
+  late String _addressString;
 
   Stream get stream => _torrentStream;
 
   Sink get sink => _torrentToggleSink;
 
-  TorrentBloc(Stream address) {
+  TorrentBloc(Stream? address) {
     _torrentSubject = BehaviorSubject.seeded(TorrentStats((t) => t
       ..running = false
       ..torrentStatus = ''));
-    _torrentToggleSubject = new BehaviorSubject();
+    _torrentToggleSubject = BehaviorSubject();
     _torrentToggleSink = _torrentToggleSubject.sink;
     _torrentStream = _torrentSubject.stream;
     _torrentSink = _torrentSubject.sink;
     _torrentToggleSubject.listen(_torrentToggleListener);
     _address = address;
-    _address.listen((address) {
+    _address?.listen((address) {
       if (address != null) _update(address.address);
     });
   }
@@ -41,18 +41,20 @@ class TorrentBloc {
     try {
       final res = await http.get('http://$_addressString:8888/torrentstatus/1');
       _torrentSink.add(TorrentStats.fromJson(res.body));
-    }catch(e){
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(SnackBar(
+        content: Text('${e.toString()}'),
+      ));
     }
   }
 
   void _torrentToggleListener(toggle) async {
-    try{
+    try {
       await http.post('http://$_addressString:8888/torrentstatus/$toggle');
-    }catch(e){
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+    } catch (e) {
+      Bloc.instance.scaffold.showSnackBar(SnackBar(
+        content: Text('${e.toString()}'),
+      ));
     }
   }
 

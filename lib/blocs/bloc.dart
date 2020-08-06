@@ -18,27 +18,28 @@ import 'package:rxdart/rxdart.dart';
 
 class Bloc {
   static final Bloc _instance = Bloc._private();
+
   static Bloc get instance => _instance;
 
-  UptimeBloc uptime;
-  RebootBloc reboot;
-  PoweroffBloc poweroff;
-  TeledartBloc teledart;
-  TorrentBloc torrent;
-  SambaBloc samba;
-  SSHBloc ssh;
-  NetAtalkBloc apfs;
-  DiskBloc disk;
-  PiholeBloc pihole;
-  ThemeBloc theme;
+  late UptimeBloc uptime;
+  late RebootBloc reboot;
+  late PoweroffBloc poweroff;
+  late TeledartBloc teledart;
+  late TorrentBloc torrent;
+  late SambaBloc samba;
+  late SSHBloc ssh;
+  late NetAtalkBloc apfs;
+  late DiskBloc disk;
+  late PiholeBloc pihole;
+  late ThemeBloc theme;
 
-  BehaviorSubject _indirizzoRaspberrySubject;
+  late BehaviorSubject _indirizzoRaspberrySubject;
 
-  Sink _sinkAddress;
+  late Sink _sinkAddress;
 
   Stream get address => _indirizzoRaspberrySubject.stream;
 
-  GlobalKey<ScaffoldState> _scaffoldState;
+  late GlobalKey<ScaffoldState> _scaffoldState;
 
   void setScaffoldState(GlobalKey<ScaffoldState> scaffoldState) =>
       _scaffoldState = scaffoldState;
@@ -84,7 +85,7 @@ class Bloc {
     }
     RawDatagramSocket.bind(InternetAddress.anyIPv4, 8889).then((socket) {
       socket.listen((e) {
-        Datagram dg = socket.receive();
+        Datagram? dg = socket.receive();
         _sinkAddress.add(dg?.address);
       });
     });

@@ -10,7 +10,7 @@ part 'apfs.g.dart';
 
 abstract class NetAtalk implements Built<NetAtalk, NetAtalkBuilder> {
   // fields go here
-  bool get running;
+  bool? get running;
 
   NetAtalk._();
 
