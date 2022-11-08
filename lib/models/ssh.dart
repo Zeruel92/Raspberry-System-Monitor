@@ -1,8 +1,10 @@
 library ssh;
 
 import 'dart:convert';
+
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+
 import 'serializers.dart';
 
 part 'ssh.g.dart';
@@ -19,7 +21,7 @@ abstract class SSHStatus implements Built<SSHStatus, SSHStatusBuilder> {
     return json.encode(serializers.serializeWith(SSHStatus.serializer, this));
   }
 
-  static SSHStatus fromJson(String jsonString) {
+  static SSHStatus? fromJson(String jsonString) {
     return serializers.deserializeWith(
         SSHStatus.serializer, json.decode(jsonString));
   }

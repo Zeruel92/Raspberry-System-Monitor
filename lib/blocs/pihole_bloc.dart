@@ -1,59 +1,57 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/pihole.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'bloc.dart';
-
 class PiholeBloc {
-  BehaviorSubject<Pihole> _subject;
-  BehaviorSubject<bool> _toggleSubject;
+  late BehaviorSubject<Pihole> _subject;
+  late BehaviorSubject<bool> _toggleSubject;
 
-  Stream _stream;
-  String _addressString;
+  late Stream _stream;
+  late String _addressString;
 
-  Sink _tSink;
-  Sink _piholeSink;
+  late Sink _tSink;
+  late Sink _piholeSink;
 
-  Stream _address;
+  Stream? _address;
 
   Stream get stream => _stream;
 
   Sink get sink => _tSink;
 
-  PiholeBloc(Stream address) {
+  PiholeBloc(Stream? address) {
     _subject =
-        new BehaviorSubject.seeded(Pihole((pihole) => pihole..running = false));
-    _toggleSubject = new BehaviorSubject();
+        BehaviorSubject.seeded(Pihole((pihole) => pihole..running = false));
+    _toggleSubject = BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
     _piholeSink = _subject.sink;
     _toggleSubject.listen(_toggleListener);
     _address = address;
-    _address.listen((address) {
+    _address?.listen((address) {
       if (address != null) _update(address.address);
     });
   }
 
   void _toggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/pihole/$toggle');
+      await http.post(Uri(path: 'http://$_addressString:8888/pihole/$toggle'));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 
   void _update(String address) async {
     _addressString = address;
     try {
-      final res = await http.get('http://$_addressString:8888/pihole/1');
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/pihole/1'));
       _piholeSink.add(Pihole.fromJson(res.body));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

@@ -23,7 +23,7 @@ abstract class TorrentStats
         .encode(serializers.serializeWith(TorrentStats.serializer, this));
   }
 
-  static TorrentStats fromJson(String jsonString) {
+  static TorrentStats? fromJson(String jsonString) {
     return serializers.deserializeWith(
         TorrentStats.serializer, json.decode(jsonString));
   }

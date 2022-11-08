@@ -6,11 +6,11 @@ import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeBloc {
-  BehaviorSubject<bool> _dark;
-  Stream _stream;
-  Sink _sink;
+  late BehaviorSubject<bool> _dark;
+  late Stream<bool> _stream;
+  late Sink _sink;
 
-  Stream get stream => _stream;
+  Stream<bool> get stream => _stream;
 
   Sink get sink => _sink;
 

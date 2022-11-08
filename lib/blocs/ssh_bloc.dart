@@ -1,57 +1,56 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/ssh.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'bloc.dart';
-
 class SSHBloc {
-  BehaviorSubject<SSHStatus> _subject;
-  BehaviorSubject<bool> _toggleSubject;
+  late BehaviorSubject<SSHStatus> _subject;
+  late BehaviorSubject<bool> _toggleSubject;
 
-  Stream _stream;
-  String _addressString;
+  late Stream _stream;
+  late String _addressString;
 
-  Sink _tSink;
-  Sink _sshSink;
+  late Sink _tSink;
+  late Sink _sshSink;
 
-  Stream _address;
+  Stream? _address;
 
   Stream get stream => _stream;
 
   Sink get sink => _tSink;
 
-  SSHBloc(Stream address) {
-    _subject =
-    new BehaviorSubject.seeded(SSHStatus((ssh) => ssh..running = false));
-    _toggleSubject = new BehaviorSubject();
+  SSHBloc(Stream? address) {
+    _subject = BehaviorSubject.seeded(SSHStatus((ssh) => ssh..running = false));
+    _toggleSubject = BehaviorSubject();
     _tSink = _toggleSubject.sink;
     _stream = _subject.stream;
     _sshSink = _subject.sink;
     _toggleSubject.listen(_sshToggleListener);
     _address = address;
-    _address.listen((address) {
+    _address?.listen((address) {
       if (address != null) _update(address.address);
     });
   }
 
   void _sshToggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/ssh/$toggle');
-    }catch (e){
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+      await http.post(Uri(path: 'http://$_addressString:8888/ssh/$toggle'));
+    } catch (e) {
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 
   void _update(String address) async {
     _addressString = address;
-    try{
-      final res = await http.get('http://$_addressString:8888/ssh/1');
+    try {
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/ssh/1'));
       _sshSink.add(SSHStatus.fromJson(res.body));
-    }catch (e){
-      Bloc.instance.scaffold.showSnackBar(
-          SnackBar(content: Text('${e.toString()}'),));
+    } catch (e) {
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

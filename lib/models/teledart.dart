@@ -2,9 +2,10 @@ library teledart;
 
 import 'dart:convert';
 
-import 'serializers.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+
+import 'serializers.dart';
 
 part 'teledart.g.dart';
 
@@ -20,7 +21,7 @@ abstract class Teledart implements Built<Teledart, TeledartBuilder> {
     return json.encode(serializers.serializeWith(Teledart.serializer, this));
   }
 
-  static Teledart fromJson(String jsonString) {
+  static Teledart? fromJson(String jsonString) {
     return serializers.deserializeWith(
         Teledart.serializer, json.decode(jsonString));
   }
