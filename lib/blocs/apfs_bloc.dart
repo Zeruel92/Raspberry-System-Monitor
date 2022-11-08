@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/apfs.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'bloc.dart';
 
 class NetAtalkBloc {
   late BehaviorSubject<NetAtalk> _subject;
@@ -37,23 +34,25 @@ class NetAtalkBloc {
 
   void _afpToggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/netatalk/$toggle');
+      await http
+          .post(Uri(path: 'http://$_addressString:8888/netatalk/$toggle'));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
+      /*Bloc.instance.scaffold.showSnackBar(SnackBar(
         content: Text('${e.toString()}'),
-      ));
+      ));*/
     }
   }
 
   void _update(String address) async {
     _addressString = address;
     try {
-      final res = await http.get('http://$_addressString:8888/netatalk/1');
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/netatalk/1'));
       _apfsSink.add(NetAtalk.fromJson(res.body));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
+      /* Bloc.instance.scaffold.showSnackBar(SnackBar(
         content: Text('${e.toString()}'),
-      ));
+      ));*/
     }
   }
 

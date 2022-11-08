@@ -44,7 +44,7 @@ class Bloc {
   void setScaffoldState(GlobalKey<ScaffoldState> scaffoldState) =>
       _scaffoldState = scaffoldState;
 
-  ScaffoldState get scaffold => _scaffoldState.currentState;
+  ScaffoldState? get scaffold => _scaffoldState.currentState;
 
   Bloc._private() {
     _indirizzoRaspberrySubject = new BehaviorSubject();

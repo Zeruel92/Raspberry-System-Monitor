@@ -13,7 +13,7 @@ class _LandingState extends State<Landing> {
   late double end;
   late bool animation;
   StreamSubscription? streamListener;
-  late GlobalKey<ScaffoldState> _scaffoldState;
+  final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -21,9 +21,9 @@ class _LandingState extends State<Landing> {
     start = 0.0;
     end = 1.0;
     animation = true;
-    _scaffoldState = GlobalKey<ScaffoldState>();
+    //_scaffoldState = GlobalKey<ScaffoldState>();
     streamListener = Bloc.instance.uptime.stream.listen((event) {
-      Navigator.pushReplacementNamed(_scaffoldState.currentContext, '/home');
+      Navigator.of(context).pushReplacementNamed('/home');
     });
   }
 

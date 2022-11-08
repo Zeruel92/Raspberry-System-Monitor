@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
-
-import 'bloc.dart';
 
 class PoweroffBloc {
   late BehaviorSubject _powerOffSubject;
@@ -25,13 +22,14 @@ class PoweroffBloc {
 
   void _powerOffListener(onValue) async {
     try {
-      final res = await http.get('http://$_addressString:8888/poweroff');
-      Bloc.instance.scaffold
-          .showSnackBar(SnackBar(content: Text(res.body.toString())));
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/poweroff'));
+      // Bloc.instance.scaffold
+      //     .showSnackBar(SnackBar(content: Text(res.body.toString())));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

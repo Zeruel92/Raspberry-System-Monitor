@@ -37,23 +37,25 @@ class TeledartBloc {
 
   void _teledartToggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/teledart/$toggle');
+      await http
+          .post(Uri(path: 'http://$_addressString:8888/teledart/$toggle'));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 
   void _update(String address) async {
     _addressString = address;
     try {
-      final res = await http.get('http://$_addressString:8888/teledart/1');
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/teledart/1'));
       _teledartSink.add(Teledart.fromJson(res.body));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

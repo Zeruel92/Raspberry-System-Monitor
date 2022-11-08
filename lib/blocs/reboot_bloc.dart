@@ -29,13 +29,14 @@ class RebootBloc {
 
   void _rebootListener(onValue) async {
     try {
-      final res = await http.get('http://$_addressString:8888/reboot');
-      Bloc.instance.scaffold
-          .showSnackBar(SnackBar(content: Text('${res.body}')));
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/reboot'));
+      // Bloc.instance.scaffold
+      //     .showSnackBar(SnackBar(content: Text('${res.body}')));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

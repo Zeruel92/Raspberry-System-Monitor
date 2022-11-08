@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/torrentstat.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'bloc.dart';
 
 class TorrentBloc {
   late BehaviorSubject<TorrentStats> _torrentSubject;
@@ -39,22 +36,24 @@ class TorrentBloc {
   void _update(String address) async {
     _addressString = address;
     try {
-      final res = await http.get('http://$_addressString:8888/torrentstatus/1');
+      final res = await http
+          .get(Uri(path: 'http://$_addressString:8888/torrentstatus/1'));
       _torrentSink.add(TorrentStats.fromJson(res.body));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 
   void _torrentToggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/torrentstatus/$toggle');
+      await http
+          .post(Uri(path: 'http://$_addressString:8888/torrentstatus/$toggle'));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

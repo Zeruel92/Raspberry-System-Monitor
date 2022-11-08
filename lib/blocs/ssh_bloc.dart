@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:raspberry_system_monitor/models/ssh.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'bloc.dart';
 
 class SSHBloc {
   late BehaviorSubject<SSHStatus> _subject;
@@ -36,23 +33,24 @@ class SSHBloc {
 
   void _sshToggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/ssh/$toggle');
+      await http.post(Uri(path: 'http://$_addressString:8888/ssh/$toggle'));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 
   void _update(String address) async {
     _addressString = address;
     try {
-      final res = await http.get('http://$_addressString:8888/ssh/1');
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/ssh/1'));
       _sshSink.add(SSHStatus.fromJson(res.body));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

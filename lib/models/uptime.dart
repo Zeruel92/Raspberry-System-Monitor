@@ -22,7 +22,7 @@ abstract class Uptime implements Built<Uptime, UptimeBuilder> {
     return json.encode(serializers.serializeWith(Uptime.serializer, this));
   }
 
-  static Uptime fromJson(String jsonString) {
+  static Uptime? fromJson(String jsonString) {
     return serializers.deserializeWith(
         Uptime.serializer, json.decode(jsonString));
   }

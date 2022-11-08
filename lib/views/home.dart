@@ -51,7 +51,8 @@ class _HomeState extends State<Home> {
                   stream: Bloc.instance.theme.stream,
                   builder: (context, snapshot) {
                     return GestureDetector(
-                      onTap: () => Bloc.instance.theme.sink.add(!snapshot.data),
+                      onTap: null,
+                      //() => snapshot.hasData ? Bloc.instance.theme.sink.add(!snapshot.data) : null,
                       child: Card(
                         child: Row(
                           children: <Widget>[

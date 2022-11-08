@@ -36,23 +36,24 @@ class SambaBloc {
 
   void _sambaToggleListener(toggle) async {
     try {
-      await http.post('http://$_addressString:8888/smb/$toggle');
+      await http.post(Uri(path: 'http://$_addressString:8888/smb/$toggle'));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 
   void _update(String address) async {
     _addressString = address;
     try {
-      final res = await http.get('http://$_addressString:8888/smb/1');
+      final res =
+          await http.get(Uri(path: 'http://$_addressString:8888/smb/1'));
       _sambaSink.add(Samba.fromJson(res.body));
     } catch (e) {
-      Bloc.instance.scaffold.showSnackBar(SnackBar(
-        content: Text('${e.toString()}'),
-      ));
+      // Bloc.instance.scaffold.showSnackBar(SnackBar(
+      //   content: Text('${e.toString()}'),
+      // ));
     }
   }
 

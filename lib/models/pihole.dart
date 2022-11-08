@@ -21,7 +21,7 @@ abstract class Pihole implements Built<Pihole, PiholeBuilder> {
     return json.encode(serializers.serializeWith(Pihole.serializer, this));
   }
 
-  static Pihole fromJson(String jsonString) {
+  static Pihole? fromJson(String jsonString) {
     return serializers.deserializeWith(
         Pihole.serializer, json.decode(jsonString));
   }

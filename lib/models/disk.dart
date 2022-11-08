@@ -19,7 +19,7 @@ abstract class DiskModel implements Built<DiskModel,DiskModelBuilder>{
     return json.encode(serializers.serializeWith(DiskModel.serializer, this));
   }
 
-  static DiskModel fromJson(String jsonString) {
+  static DiskModel? fromJson(String jsonString) {
     return serializers.deserializeWith(
         DiskModel.serializer, json.decode(jsonString));
   }

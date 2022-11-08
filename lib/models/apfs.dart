@@ -20,7 +20,7 @@ abstract class NetAtalk implements Built<NetAtalk, NetAtalkBuilder> {
     return json.encode(serializers.serializeWith(NetAtalk.serializer, this));
   }
 
-  static NetAtalk fromJson(String jsonString) {
+  static NetAtalk? fromJson(String jsonString) {
     return serializers.deserializeWith(
         NetAtalk.serializer, json.decode(jsonString));
   }
